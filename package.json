@@ -1,0 +1,21 @@
+{
+  "name": "project_suite_crm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0"
+  },
+  "dependencies": {
+    "@langchain/core": "^1.1.41",
+    "exceljs": "^3.4.0",
+    "langchain": "^0.0.7",
+    "xlsx": "^0.18.5"
+  }
+}
