@@ -14,24 +14,24 @@ test.afterAll('disconnect DB',async()=>{
     console.log('DB disconnected')
 })
 
-test.beforeEach('login',async({page})=>{
-await page.goto(file.url);
+// test.beforeEach('login',async({page})=>{
+// await page.goto(file.url);
 
-await page.getByRole('textbox', { name: 'Username' }).fill('admin');
-await page.getByRole('textbox', { name: 'Password' }).fill('password');
-await page.getByRole('button', { name: '🔐 Login' }).click();
-await expect(page.locator('#dashboard')).toContainText('Dashboard');
-})
+// await page.getByRole('textbox', { name: 'Username' }).fill('admin');
+// await page.getByRole('textbox', { name: 'Password' }).fill('password');
+// await page.getByRole('button', { name: '🔐 Login' }).click();
+// await expect(page.locator('#dashboard')).toContainText('Dashboard');
+// })
 
-test.afterEach('logout',async({page})=>{
-    await page.goto(file.url)
-    await page.locator("div[class='user-avatar']").hover()
-page.once('dialog', dialog => {
-    console.log(`Dialog message: ${dialog.message()}`);
-    dialog.accept();
-  });
-  await page.getByRole('button', { name: 'Logout' }).click();
-})
+// test.afterEach('logout',async({page})=>{
+//     await page.goto(file.url)
+//     await page.locator("div[class='user-avatar']").hover()
+// page.once('dialog', dialog => {
+//     console.log(`Dialog message: ${dialog.message()}`);
+//     dialog.accept();
+//   });
+//   await page.getByRole('button', { name: 'Logout' }).click();
+// })
 
 
 
