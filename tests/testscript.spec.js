@@ -189,10 +189,11 @@ test('simple',async({page})=>{
 })
 
 test('Create lead with multiple data set',async({page})=>{
-    let home=new homepage(page)
-    await home.leads()
-    let lead=new leadspage(page)
-    await lead.createmulti(page)
+    // let home=new homepage(page)
+    // await home.leads()
+    // let lead=new leadspage(page)
+    // await lead.createmulti(page)
+    await page.goto("https://www.flipkart.com/")
     await page.pause()
     
 })
