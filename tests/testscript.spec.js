@@ -7,21 +7,21 @@ import { expect, test} from '@playwright/test'
 import testdrive from "../POM/testdrivepage.js"
 import accountpage from "../POM/accountpage.js"
 
-test.beforeAll('connect to DB',async()=>{
-    console.log('DB connected')
-})
-test.afterAll('disconnect DB',async()=>{
-    console.log('DB disconnected')
-})
+// test.beforeAll('connect to DB',async()=>{
+//     console.log('DB connected')
+// })
+// test.afterAll('disconnect DB',async()=>{
+//     console.log('DB disconnected')
+// })
 
-// test.beforeEach('login',async({page})=>{
-// await page.goto(file.url);
+//  test.beforeEach('login',async({page})=>{
+//  await page.goto(file.url);
 
 // await page.getByRole('textbox', { name: 'Username' }).fill('admin');
 // await page.getByRole('textbox', { name: 'Password' }).fill('password');
 // await page.getByRole('button', { name: '🔐 Login' }).click();
 // await expect(page.locator('#dashboard')).toContainText('Dashboard');
-// })
+ //})
 
 // test.afterEach('logout',async({page})=>{
 //     await page.goto(file.url)
@@ -37,7 +37,7 @@ test.afterAll('disconnect DB',async()=>{
 
 //TS-1
 test('login & logout',async({page})=>{
-    await page.goto(file.url)
+    await page.goto(file.url)   
     let login=new loginpage(page)
     let home=new homepage(page)
     //await page.on('dialog',(dialog)=>{dialog.accept()})
@@ -129,6 +129,24 @@ test("create lead with mandtory fields",async({page})=>{
     console.log("lead converted succfully")
 })
 
+test('login, create lead with mandatory fields, validate creation, and logout', async ({ page }) => {
+    await page.goto(file.url)
+    const login = new loginpage(page)
+    const home = new homepage(page)
+    const lead = new leadspage(page)
+
+    await login.login()
+    await expect(page.locator("//button[contains(.,'Leads')]")).toBeVisible()
+
+    await home.leads()
+    const leadPhone = await lead.createleadwithmand(page)
+
+    await expect(page.locator(`//td[contains(.,'${leadPhone}')]`)).toBeVisible({ timeout: 10000 })
+
+    await home.logout(page)
+    await expect(login.loginbtn).toBeVisible()
+})
+
 //TS-7
 test("creating testdrive for created leads",async({page})=>{
    // await page.goto(file.url)
@@ -184,8 +202,9 @@ test.fail("creating account without account name",async({page})=>{
 
 test('simple',async({page})=>{
    let home=new homepage(page)
-   await home.account()
-   await page.pause()
+    await page.pause()
+    await home.account()
+  
 })
 
 test('Create lead with multiple data set',async({page})=>{
@@ -198,6 +217,11 @@ test('Create lead with multiple data set',async({page})=>{
     
 })
 
+test.only("session storage",async({page})=>{
+    await page.goto("https://practicetestautomation.com/logged-in-successfully/")
+    await page.getByRole('link',{name:'Courses'}).click()
+    await page.pause()
+})
 
 
 

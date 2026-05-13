@@ -57,8 +57,9 @@ class leadspage{
        
         await this.leadrating.selectOption('Hot')
         await this.savebtn.click()
-       // await expect(await page.locator(`//td[contains(.,'${this.ran}')]`).textContent()).toHave(this.ran)
+        await page.locator(`//td[contains(.,'${this.ran}')]`).waitFor({ state: 'visible', timeout: 10000 })
         console.log('lead created successfully')
+        return this.ran
     }
 
     async createmulti(page)

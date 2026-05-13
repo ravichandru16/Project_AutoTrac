@@ -35,12 +35,13 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
    
-     //headless:false,
+     headless:false,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     screenshot:'only-on-failure',
     video:'retry-with-video',
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
+    storageState:'playwright/.auth/user.json'
   },
 
   /* Configure projects for major browsers */
