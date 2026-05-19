@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-import { run } from 'node:test';
+import dotenv from "dotenv"
+
 
 /**
  * Read environment variables from file.
@@ -13,6 +14,7 @@ import { run } from 'node:test';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
+dotenv.config({path:`process.env.${process.env.ENV}||dev`})
 export default defineConfig({
   testDir: './tests',
 
@@ -34,14 +36,14 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-   
+    // baseURL:process.env.BASEURL,
      headless:false,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     screenshot:'only-on-failure',
     video:'retry-with-video',
     trace: 'on-first-retry',
-    storageState:'playwright/.auth/user.json'
+    //storageState:'playwright/user.json'
   },
 
   /* Configure projects for major browsers */
@@ -50,6 +52,40 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+
+    {
+      //regression setup
+      name:'regression-setup',
+      testMatch:'tests/global-setup.js',
+      use:{
+        browserName:'chromium'
+      }
+    },
+    {
+      //smoke suite
+      name:'smoke_suite',
+      testDir:'tests/smoke'
+    },
+    {
+      //mobile suite
+      name:'mobile_suite',
+      testDir:'tests/smoke',
+      use:{
+        browserName:'webkit',
+        ...devices['iPhone 13 Pro Max']
+      }
+    },
+    {
+      //regression suite
+      name:'regression_suite',
+      testDir:'tests/regression',
+      dependencies:['regression-setup'],
+      use:{
+        browserName:'chromium',
+        storageState:'./playwright/setupfile.json'
+      }
+    }
+
 
     // {
     //   name: 'firefox',

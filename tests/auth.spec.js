@@ -1,14 +1,18 @@
 import {test as setup} from "@playwright/test"
 import path from "path"
 
+require('dotenv').config({path:path.join(__dirname,`../test_data/.env.${process.env.ENV}`)})
+const authfile=path.join(__dirname,"../playwright/user.json")
 
-const authfile=path.join(__dirname,"../playwright/.auth/user.json")
+setup("authentication",async({browser})=>{
+    let context=await browser.newContext()
+    let page=await context.newPage()
+    
+    await page.goto(process.env.BASE_URL)
+    await page.getByPlaceholder('Username').fill(process.env.USER_NAME)
+    await page.getByPlaceholder('Password').fill(process.env.PASSWORD)
+    await page.getByRole('button',{name:' Login '}).click()
 
-setup("authendication",async({page})=>{
-    await page.goto("https://practicetestautomation.com/practice-test-login/")
-    await page.locator('#username').fill('student')
-    await page.locator('#password').fill('Password123')
-    await page.getByRole('button',{name:'Submit'})
-
-    await page.context().storageState({path:authfile})
+    await page.waitForLoadState('networkidle')
+    await context.storageState({path:authfile})
 })

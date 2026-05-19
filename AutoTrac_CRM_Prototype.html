@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoTrac CRM - Automotive Sales Management</title>
+    <title>Voltrac CRM - Automotive Sales Management</title>
     <style>
         * {
             margin: 0;
@@ -13,16 +13,17 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: radial-gradient(circle at top left, #111111 0%, #1f2937 35%, #0f172a 100%);
             min-height: 100vh;
+            color: #e2e8f0;
         }
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
             color: white;
             padding: 15px 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -34,17 +35,26 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
         }
 
         .logo-icon {
-            background: #f59e0b;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 50%;
+            background: #000000;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.30);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .logo-icon svg {
+            width: 68%;
+            height: 68%;
+            display: block;
         }
 
         .user-info {
@@ -264,41 +274,102 @@
             display: flex;
         }
 
-        .car-runner {
+        .logo-loader {
             position: relative;
-            width: 180px;
-            height: 72px;
+            width: 160px;
+            height: 160px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 54px;
-            animation: driveAcross 0.75s ease-in-out forwards;
+            opacity: 0;
+            animation: fadeBuffer 0.9s ease-in-out forwards;
         }
 
-        .car-runner::after {
+        .logo-transition {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: #0f172a;
+            border: 2px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 0 0 0 rgba(255,255,255,0.15);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            animation: pulseGlow 1.5s ease-in-out infinite;
+        }
+
+        .logo-transition svg {
+            width: 42px;
+            height: 42px;
+        }
+
+        .logo-loader-text {
+            margin-top: 12px;
+            color: #f8fafc;
+            font-size: 14px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .logo-loader-text::after {
+            content: ' • • •';
+            color: rgba(255, 255, 255, 0.65);
+            animation: dotPulse 1.2s infinite steps(3, end);
+            margin-left: 4px;
+        }
+
+        .logo-loader::after {
             content: '';
             position: absolute;
-            bottom: 14px;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, rgba(56,189,248,0.8), rgba(124,58,237,0.8));
-            filter: blur(8px);
+            inset: 0;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 0 30px rgba(255,255,255,0.08), 0 0 60px rgba(59,130,246,0.14);
             opacity: 0.6;
+            filter: blur(10px);
+            animation: glowRing 1.5s ease-in-out infinite;
         }
 
-        @keyframes driveAcross {
+        @keyframes fadeBuffer {
             0% {
-                transform: translateX(-150%) scale(0.8);
                 opacity: 0;
+                transform: scale(0.92);
             }
-            50% {
-                transform: translateX(0) scale(1);
+            60% {
                 opacity: 1;
+                transform: scale(1.02);
             }
             100% {
-                transform: translateX(150%) scale(0.8);
-                opacity: 0;
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { content: ' • • •'; }
+            33% { content: ' •  •'; }
+            66% { content: '   •'; }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255,255,255,0.1);
+            }
+            50% {
+                box-shadow: 0 0 0 18px rgba(30,58,138,0.08);
+            }
+        }
+
+        @keyframes glowRing {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.08);
+                opacity: 0.9;
             }
         }
 
@@ -715,6 +786,92 @@
             justify-content: space-around;
             height: 200px;
             gap: 10px;
+        }
+
+        .pie-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 260px;
+            padding: 10px 0;
+        }
+
+        .pie-wrapper {
+            position: relative;
+            width: 220px;
+            height: 220px;
+        }
+
+        .pie-wrapper svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .pie-bg {
+            fill: transparent;
+            stroke: #e2e8f0;
+            stroke-width: 32;
+        }
+
+        .pie-segment {
+            fill: transparent;
+            stroke-linecap: round;
+            stroke-width: 32;
+            transition: stroke-dashoffset 0.4s ease, stroke-dasharray 0.4s ease;
+        }
+
+        .pie-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #f8fafc;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .pie-center strong {
+            display: block;
+            font-size: 24px;
+            color: #0f172a;
+            line-height: 1;
+        }
+
+        .pie-center span {
+            display: block;
+            margin-top: 4px;
+            font-size: 12px;
+            color: #64748b;
+            letter-spacing: 0.08em;
+        }
+
+        .pie-legend {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .pie-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #475569;
+            font-size: 13px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 4px;
+            display: inline-block;
         }
 
         .bar {
@@ -1137,7 +1294,7 @@
 <body>
     <div id="loginScreen" class="login-screen">
         <div class="login-card">
-            <h2>AutoTrac CRM Login</h2>
+            <h2>Voltrac CRM Login</h2>
             <div class="form-group">
                 <label for="loginUsername">Username</label>
                 <input id="loginUsername" type="text" placeholder="admin">
@@ -1154,9 +1311,20 @@
     <div id="appShell" class="login-hidden">
         <!-- Header -->
         <div class="header">
-            <div class="logo">
-                <div class="logo-icon">🚗</div>
-                <span>AutoTrac CRM</span>
+            <div class="logo" onclick="openAboutUs()" role="button" tabindex="0" aria-label="Learn more about Voltrac CRM">
+                <div class="logo-icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="voltracLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                                <stop offset="100%" stop-color="#e5e7eb" stop-opacity="1"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M18 22 L32 44 L46 22" fill="none" stroke="url(#voltracLogoGrad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M24 22 L32 34 L40 22" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <span>Voltrac CRM</span>
             </div>
             <div class="user-info">
                 <span id="userGreeting">Welcome, Ravichandran</span>
@@ -1177,6 +1345,11 @@
         <button onclick="showModule('contacts', this)">👥 Contacts</button>
         <button onclick="showModule('accounts', this)">🏢 Accounts</button>
         <button onclick="showModule('opportunities', this)">💼 Opportunities</button>
+        <button onclick="showModule('inventory', this)">🚙 Inventory</button>
+        <button onclick="showModule('tradein', this)">🔄 Trade-In</button>
+        <button onclick="showModule('service', this)">🔧 Service</button>
+        <button onclick="showModule('finance', this)">💰 Finance</button>
+        <button onclick="showModule('showroom', this)">📊 Showroom</button>
         <button onclick="showModule('ebrochure', this)">📧 E-Brochure</button>
         <button onclick="showModule('equotation', this)">🧾 E-Quotation</button>
         <button onclick="showModule('testdrives', this)">🚗 Test Drives</button>
@@ -1185,7 +1358,21 @@
     </div>
 
     <div id="transitionOverlay" class="transition-overlay">
-        <div class="car-runner">🚗</div>
+        <div class="logo-loader">
+            <div class="logo-transition" aria-hidden="true">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img">
+                    <defs>
+                        <linearGradient id="transitionLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+                            <stop offset="100%" stop-color="#d1d5db" stop-opacity="1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M18 22 L32 44 L46 22" fill="none" stroke="url(#transitionLogoGrad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M24 22 L32 34 L40 22" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="logo-loader-text">Voltrac</div>
+        </div>
     </div>
 
     <!-- Container -->
@@ -1196,7 +1383,7 @@
                 <h1 class="module-title">Dashboard</h1>
                 <div style="color: #64748b; font-size: 14px;">Real-time Sales Overview</div>
                 <div style="margin-top: 12px; font-size: 14px;">
-                    <a href="#" onclick="openAboutUs(); return false;" style="color: #2563eb; text-decoration: none; font-weight: 600;">Learn more about AutoTrac CRM</a>
+                    <a href="#" onclick="openAboutUs(); return false;" style="color: #2563eb; text-decoration: none; font-weight: 600;">Learn more about Voltrac CRM</a>
                 </div>
             </div>
 
@@ -1256,17 +1443,17 @@
             <div class="chart-container">
                 <div class="chart-box">
                     <div class="chart-title">Lead Source Distribution</div>
-                    <div id="leadSourceGraph" class="bar-chart"></div>
+                    <div id="leadSourceGraph" class="pie-chart"></div>
                 </div>
 
                 <div class="chart-box">
                     <div class="chart-title">Monthly Performance</div>
-                    <div id="monthlyPerformanceGraph" class="bar-chart"></div>
+                    <div id="monthlyPerformanceGraph" class="pie-chart"></div>
                 </div>
 
                 <div class="chart-box">
                     <div class="chart-title">Test Drive Completion Rate</div>
-                    <div id="testDriveCompletionGraph" class="bar-chart"></div>
+                    <div id="testDriveCompletionGraph" class="pie-chart"></div>
                 </div>
             </div>
         </div>
@@ -1859,6 +2046,209 @@
                 </div>
             </div>
         </div>
+
+        <!-- Vehicle Inventory Module -->
+        <div id="inventory" class="module">
+            <div class="module-header">
+                <h1 class="module-title">Vehicle Inventory</h1>
+                <button class="btn-primary" onclick="openInventoryModal('create')">
+                    <span>➕</span> Add Vehicle
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vehicle ID</th>
+                        <th>Model</th>
+                        <th>Color</th>
+                        <th>Price</th>
+                        <th>Registration</th>
+                        <th>Fuel Type</th>
+                        <th>Transmission</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTable">
+                    <tr>
+                        <td>VEH-1001</td>
+                        <td>Honda City VX</td>
+                        <td>Pearl White</td>
+                        <td>₹14.5L</td>
+                        <td>KA01AB1234</td>
+                        <td>Petrol</td>
+                        <td>Manual</td>
+                        <td><span class="badge success">Available</span></td>
+                        <td><div class="action-btns"><button class="btn-action btn-view" onclick="openInventoryModal('view', 'VEH-1001')">View</button></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Trade-In Valuation Module -->
+        <div id="tradein" class="module">
+            <div class="module-header">
+                <h1 class="module-title">Trade-In Valuation</h1>
+                <button class="btn-primary" onclick="openTradeInModal('create')">
+                    <span>➕</span> New Valuation
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Trade-In ID</th>
+                        <th>Customer Name</th>
+                        <th>Vehicle Model</th>
+                        <th>Year</th>
+                        <th>Condition</th>
+                        <th>Estimated Value</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tradeinTable">
+                    <tr>
+                        <td>TI-1001</td>
+                        <td>Rajesh Verma</td>
+                        <td>Maruti Alto</td>
+                        <td>2018</td>
+                        <td><span class="badge warm">Good</span></td>
+                        <td>₹3.5L</td>
+                        <td><span class="badge success">Valuation Done</span></td>
+                        <td><div class="action-btns"><button class="btn-action btn-view">View</button></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Service & Maintenance Module -->
+        <div id="service" class="module">
+            <div class="module-header">
+                <h1 class="module-title">Service & Maintenance</h1>
+                <button class="btn-primary" onclick="openServiceModal('create')">
+                    <span>➕</span> Book Service
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service ID</th>
+                        <th>Customer Name</th>
+                        <th>Vehicle</th>
+                        <th>Registration</th>
+                        <th>Service Type</th>
+                        <th>Date & Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="serviceTable">
+                    <tr>
+                        <td>SVC-1001</td>
+                        <td>Amit Kumar</td>
+                        <td>Honda City</td>
+                        <td>KA01AB5555</td>
+                        <td>Regular Maintenance</td>
+                        <td>March 10, 2026 - 10:00 AM</td>
+                        <td><span class="badge new">Scheduled</span></td>
+                        <td><div class="action-btns"><button class="btn-action btn-view">View</button></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Finance & Insurance Module -->
+        <div id="finance" class="module">
+            <div class="module-header">
+                <h1 class="module-title">Finance & Insurance</h1>
+                <button class="btn-primary" onclick="openFinanceModal('create')">
+                    <span>➕</span> New Proposal
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Finance ID</th>
+                        <th>Customer Name</th>
+                        <th>Vehicle</th>
+                        <th>Vehicle Price</th>
+                        <th>Loan Amount</th>
+                        <th>EMI Amount</th>
+                        <th>EMI Months</th>
+                        <th>Status</th>
+                        <th>Bank</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="financeTable">
+                    <tr>
+                        <td>FIN-1001</td>
+                        <td>Amit Kumar</td>
+                        <td>Honda City VX</td>
+                        <td>₹14.5L</td>
+                        <td>₹11.6L</td>
+                        <td>₹24,500</td>
+                        <td>60 months</td>
+                        <td><span class="badge hot">Pre-Approved</span></td>
+                        <td>HDFC Bank</td>
+                        <td><div class="action-btns"><button class="btn-action btn-view">View</button></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Showroom Performance Module -->
+        <div id="showroom" class="module">
+            <div class="module-header">
+                <h1 class="module-title">Showroom Performance Dashboard</h1>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Daily Footfall</h3>
+                    <div class="number" id="showroomFootfall">45</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">Target: 50</div>
+                </div>
+                <div class="stat-card warm">
+                    <h3>Test Drives</h3>
+                    <div class="number" id="showroomTestDrives">12</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">Target: 15</div>
+                </div>
+                <div class="stat-card success">
+                    <h3>Conversion Rate</h3>
+                    <div class="number" id="showroomConversion">26.7%</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">Target: 30%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Avg Deal Value</h3>
+                    <div class="number" id="showroomDealValue">₹14.2L</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">Target: ₹14.5L</div>
+                </div>
+                <div class="stat-card hot">
+                    <h3>Closing Rate</h3>
+                    <div class="number" id="showroomClosing">22%</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">Target: 25%</div>
+                </div>
+            </div>
+            <h3 style="margin-top: 30px; margin-bottom: 20px; color: #334155;">Team Performance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Current Value</th>
+                        <th>Target</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="showroomMetricsTable">
+                    <tr>
+                        <td>Daily Footfall</td>
+                        <td>45</td>
+                        <td>50</td>
+                        <td><span class="badge warm">Needs Attention</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Lead Modal -->
@@ -2195,6 +2585,102 @@
     </div>
 
     <!-- Activity Modal -->
+    <div id="inventoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Vehicle to Inventory</h2>
+                <button class="close-btn" onclick="closeModal('inventoryModal')">&times;</button>
+            </div>
+            <form>
+                <div class="form-grid">
+                    <div class="form-group"><label>Model *</label><input id="inventoryModel" type="text" placeholder="Vehicle model" required></div>
+                    <div class="form-group"><label>Color *</label><input id="inventoryColor" type="text" placeholder="Color" required></div>
+                    <div class="form-group"><label>Price *</label><input id="inventoryPrice" type="text" placeholder="₹ Price" required></div>
+                    <div class="form-group"><label>Registration *</label><input id="inventoryReg" type="text" placeholder="Registration number" required></div>
+                    <div class="form-group"><label>Fuel Type *</label><input id="inventoryFuel" type="text" placeholder="Petrol/Diesel" required></div>
+                    <div class="form-group"><label>Transmission *</label><input id="inventoryTransmission" type="text" placeholder="Manual/Automatic" required></div>
+                    <div class="form-group"><label>Status *</label><input id="inventoryStatus" type="text" placeholder="Available/Reserved" required></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal('inventoryModal')">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="saveInventory()"><span>💾</span> Save Vehicle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="tradeinModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Trade-In Valuation</h2>
+                <button class="close-btn" onclick="closeModal('tradeinModal')">&times;</button>
+            </div>
+            <form>
+                <div class="form-grid">
+                    <div class="form-group"><label>Customer Name *</label><input id="tradeinCustomer" type="text" placeholder="Customer name" required></div>
+                    <div class="form-group"><label>Vehicle Model *</label><input id="tradeinModel" type="text" placeholder="Vehicle model" required></div>
+                    <div class="form-group"><label>Year *</label><input id="tradeinYear" type="text" placeholder="Year" required></div>
+                    <div class="form-group"><label>Condition *</label><input id="tradeinCondition" type="text" placeholder="Good/Fair/Excellent" required></div>
+                    <div class="form-group"><label>Estimated Value *</label><input id="tradeinValue" type="text" placeholder="₹ Value" required></div>
+                    <div class="form-group"><label>Status *</label><input id="tradeinStatus" type="text" placeholder="Pending/Valuation Done" required></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal('tradeinModal')">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="saveTradein()"><span>💾</span> Save Valuation</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Book Service</h2>
+                <button class="close-btn" onclick="closeModal('serviceModal')">&times;</button>
+            </div>
+            <form>
+                <div class="form-grid">
+                    <div class="form-group"><label>Customer Name *</label><input id="serviceCustomer" type="text" placeholder="Customer name" required></div>
+                    <div class="form-group"><label>Vehicle Model *</label><input id="serviceVehicle" type="text" placeholder="Vehicle model" required></div>
+                    <div class="form-group"><label>Registration *</label><input id="serviceReg" type="text" placeholder="Registration" required></div>
+                    <div class="form-group"><label>Service Type *</label><input id="serviceType" type="text" placeholder="Regular/Warranty/Repair" required></div>
+                    <div class="form-group"><label>Service Date *</label><input id="serviceDate" type="text" placeholder="Date & Time" required></div>
+                    <div class="form-group"><label>Status *</label><input id="serviceStatus" type="text" placeholder="Scheduled/Completed" required></div>
+                    <div class="form-group full-width"><label>Notes</label><textarea id="serviceNotes" placeholder="Service notes"></textarea></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal('serviceModal')">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="saveService()"><span>💾</span> Book Service</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="financeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Finance Proposal</h2>
+                <button class="close-btn" onclick="closeModal('financeModal')">&times;</button>
+            </div>
+            <form>
+                <div class="form-grid">
+                    <div class="form-group"><label>Customer Name *</label><input id="financeCustomer" type="text" placeholder="Customer name" required></div>
+                    <div class="form-group"><label>Vehicle Model *</label><input id="financeVehicle" type="text" placeholder="Vehicle model" required></div>
+                    <div class="form-group"><label>Vehicle Price *</label><input id="financePrice" type="text" placeholder="₹ Price" required></div>
+                    <div class="form-group"><label>Down Payment *</label><input id="financeDownPayment" type="text" placeholder="₹ Amount" required></div>
+                    <div class="form-group"><label>Loan Amount *</label><input id="financeLoan" type="text" placeholder="₹ Amount" required></div>
+                    <div class="form-group"><label>EMI Amount *</label><input id="financeEMI" type="text" placeholder="₹ EMI" required></div>
+                    <div class="form-group"><label>EMI Months *</label><input id="financeMonths" type="text" placeholder="36/48/60" required></div>
+                    <div class="form-group"><label>Status *</label><input id="financeStatus" type="text" placeholder="Pre-Approved/Approved" required></div>
+                    <div class="form-group"><label>Bank Name *</label><input id="financeBank" type="text" placeholder="Bank name" required></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal('financeModal')">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="saveFinance()"><span>💾</span> Save Proposal</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <div id="activityModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -2294,6 +2780,35 @@
 
         const sampleActivities = [
             { id: 'ACT-6001', type: 'Call', subject: 'Follow-up call with Amit', relatedTo: 'LEAD-1001', dueDate: 'Today, 3:00 PM', priority: 'High', status: 'Open' }
+        ];
+
+        const sampleInventory = [
+            { id: 'VEH-1001', model: 'Honda City VX', color: 'Pearl White', price: '₹14.5L', registrationNo: 'KA01AB1234', fuelType: 'Petrol', transmission: 'Manual', status: 'Available', mileage: '0 km', features: 'Touchscreen, ABS, Power Windows' },
+            { id: 'VEH-1002', model: 'Hyundai Creta SX', color: 'Steel Silver', price: '₹16.8L', registrationNo: 'KA01CD5678', fuelType: 'Diesel', transmission: 'Automatic', status: 'Available', mileage: '0 km', features: 'Touchscreen, Panoramic Sunroof, Cruise Control' },
+            { id: 'VEH-1003', model: 'Maruti Swift VXi', color: 'Red', price: '₹8.2L', registrationNo: 'KA01EF9012', fuelType: 'Petrol', transmission: 'Manual', status: 'Reserved', mileage: '0 km', features: 'ABS, Power Steering' }
+        ];
+
+        const sampleTradeIns = [
+            { id: 'TI-1001', customerName: 'Rajesh Verma', vehicleModel: 'Maruti Alto', vehicleYear: '2018', condition: 'Good', estimatedValue: '₹3.5L', status: 'Valuation Done', date: 'March 05, 2026' },
+            { id: 'TI-1002', customerName: 'Priya Sharma', vehicleModel: 'Hyundai i20', vehicleYear: '2019', condition: 'Excellent', estimatedValue: '₹5.2L', status: 'Pending', date: 'March 06, 2026' }
+        ];
+
+        const sampleServices = [
+            { id: 'SVC-1001', customerName: 'Amit Kumar', vehicleModel: 'Honda City', regNo: 'KA01AB5555', serviceDate: 'March 10, 2026 - 10:00 AM', serviceType: 'Regular Maintenance', status: 'Scheduled', notes: 'Oil change, filter replacement' },
+            { id: 'SVC-1002', customerName: 'Priya Sharma', vehicleModel: 'Hyundai Creta', regNo: 'KA01CD6666', serviceDate: 'March 12, 2026 - 2:00 PM', serviceType: 'Warranty Service', status: 'Completed', notes: 'General checkup, no issues found' }
+        ];
+
+        const sampleFinance = [
+            { id: 'FIN-1001', customerName: 'Amit Kumar', vehicleModel: 'Honda City VX', vehiclePrice: '₹14.5L', downPayment: '₹2.9L', loanAmount: '₹11.6L', emiMonths: 60, emiAmount: '₹24,500', status: 'Pre-Approved', bankName: 'HDFC Bank' },
+            { id: 'FIN-1002', customerName: 'Rajesh Verma', vehicleModel: 'Maruti Swift', vehiclePrice: '₹8.2L', downPayment: '₹1.64L', loanAmount: '₹6.56L', emiMonths: 36, emiAmount: '₹19,000', status: 'Approved', bankName: 'ICICI Bank' }
+        ];
+
+        const sampleShowroom = [
+            { metric: 'Daily Footfall', value: '45', target: '50', status: 'On Track' },
+            { metric: 'Test Drives', value: '12', target: '15', status: 'Needs Attention' },
+            { metric: 'Conversion Rate', value: '26.7%', target: '30%', status: 'On Track' },
+            { metric: 'Avg Deal Value', value: '₹14.2L', target: '₹14.5L', status: 'Close' },
+            { metric: 'Closing Rate', value: '22%', target: '25%', status: 'Monitor' }
         ];
 
         const editContext = {
@@ -3208,19 +3723,45 @@
             if (!container) return;
             const normalizedBars = bars.map(bar => ({
                 ...bar,
-                value: Number(bar.value) || 0,
-                height: bar.height != null ? Number(bar.height) : 0
+                label: bar.label || 'Unknown',
+                value: typeof bar.value === 'number' ? bar.value : Number(bar.value) || 0,
+                displayValue: bar.displayValue != null ? bar.displayValue : bar.value,
             }));
-            const maxHeight = Math.max(1, ...normalizedBars.map(bar => bar.height));
-            container.innerHTML = normalizedBars.map(bar => {
-                const height = bar.height === 0 ? 8 : bar.height;
-                return `
-                    <div>
-                        <div class="bar" style="height: ${height}%; background: ${bar.color};"></div>
-                        <div class="bar-label">${bar.label}<br>${bar.value}</div>
-                    </div>
-                `;
+            const totalValue = normalizedBars.reduce((sum, bar) => sum + bar.value, 0);
+            const displayTotal = bars.find(bar => bar.displayTotal != null)?.displayTotal || totalValue;
+            const radius = 80;
+            const circumference = 2 * Math.PI * radius;
+            let offset = 0;
+            const segments = normalizedBars.map(bar => {
+                const length = totalValue ? (bar.value / totalValue) * circumference : 0;
+                const dashArray = `${length} ${circumference}`;
+                const dashOffset = -offset;
+                offset += length;
+                return `<circle class="pie-segment" cx="100" cy="100" r="${radius}" stroke="${bar.color}" stroke-dasharray="${dashArray}" stroke-dashoffset="${dashOffset}" />`;
             }).join('');
+            const legendItems = normalizedBars.filter(bar => bar.value > 0).map(bar => `
+                <div class="pie-legend-item">
+                    <span class="legend-color" style="background: ${bar.color};"></span>
+                    ${bar.label} (${bar.displayValue})
+                </div>
+            `).join('');
+            container.innerHTML = `
+                <div class="pie-chart">
+                    <div class="pie-wrapper">
+                        <svg viewBox="0 0 200 200">
+                            <circle class="pie-bg" cx="100" cy="100" r="${radius}" />
+                            ${segments}
+                        </svg>
+                        <div class="pie-center">
+                            <strong>${displayTotal}</strong>
+                            <span>Total</span>
+                        </div>
+                    </div>
+                    <div class="pie-legend">
+                        ${legendItems || '<div class="pie-legend-item">No data available</div>'}
+                    </div>
+                </div>
+            `;
         }
 
         function loadTodaysFollowups() {
@@ -3277,11 +3818,11 @@
             });
             const sourceTotal = Math.max(1, Object.values(sourceCounts).reduce((sum, n) => sum + n, 0));
             const sourceColors = [
-                'linear-gradient(180deg, #3b82f6 0%, #1e40af 100%)',
-                'linear-gradient(180deg, #10b981 0%, #059669 100%)',
-                'linear-gradient(180deg, #f59e0b 0%, #d97706 100%)',
-                'linear-gradient(180deg, #ef4444 0%, #dc2626 100%)',
-                'linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%)'
+                '#3b82f6',
+                '#10b981',
+                '#f59e0b',
+                '#ef4444',
+                '#8b5cf6'
             ];
             const sourceBars = Object.entries(sourceCounts).map(([label, value], index) => ({
                 label,
@@ -3302,7 +3843,7 @@
                 if (monthMatch) {
                     const monthKey = monthMap[monthMatch[1]];
                     if (monthKey && months[monthKey] !== undefined) {
-                        months[monthKey]++;
+                        months[monthKey] += parseAmount(opportunity.amount);
                     }
                 }
             });
@@ -3310,8 +3851,8 @@
             renderChart('monthlyPerformanceGraph', Object.entries(months).slice(0, 6).map(([label, value]) => ({
                 label,
                 value,
-                height: Math.round((value / monthMax) * 100),
-                color: 'linear-gradient(180deg, #10b981 0%, #059669 100%)'
+                displayValue: value ? formatAmount(value) : 0,
+                color: '#10b981'
             })));
 
             const testDriveStatusCounts = {
@@ -3327,9 +3868,9 @@
             });
             const completionMax = Math.max(1, ...Object.values(testDriveStatusCounts));
             renderChart('testDriveCompletionGraph', [
-                { label: 'Completed', value: testDriveStatusCounts.Completed, height: Math.round((testDriveStatusCounts.Completed / completionMax) * 100), color: 'linear-gradient(180deg, #10b981 0%, #059669 100%)' },
-                { label: 'Cancelled', value: testDriveStatusCounts.Cancelled, height: Math.round((testDriveStatusCounts.Cancelled / completionMax) * 100), color: 'linear-gradient(180deg, #ef4444 0%, #dc2626 100%)' },
-                { label: 'No Show', value: testDriveStatusCounts['No Show'], height: Math.round((testDriveStatusCounts['No Show'] / completionMax) * 100), color: 'linear-gradient(180deg, #64748b 0%, #475569 100%)' }
+                { label: 'Completed', value: testDriveStatusCounts.Completed, color: '#10b981' },
+                { label: 'Cancelled', value: testDriveStatusCounts.Cancelled, color: '#ef4444' },
+                { label: 'No Show', value: testDriveStatusCounts['No Show'], color: '#64748b' }
             ]);
 
             const pipelineCounts = {
@@ -3903,6 +4444,315 @@
             window.open('about.html', '_blank');
         }
 
+        function loadInventory() {
+            const inventory = getOrInitData('inventory', sampleInventory);
+            const table = document.getElementById('inventoryTable');
+            table.innerHTML = inventory.map(v => `
+                <tr>
+                    <td>${v.id}</td>
+                    <td>${v.model}</td>
+                    <td>${v.color}</td>
+                    <td>${v.price}</td>
+                    <td>${v.registrationNo}</td>
+                    <td>${v.fuelType}</td>
+                    <td>${v.transmission}</td>
+                    <td><span class="badge ${v.status.toLowerCase()}">${v.status}</span></td>
+                    <td><div class="action-btns"><button class="btn-action btn-view" onclick="viewInventory('${v.id}')">View</button></div></td>
+                </tr>
+            `).join('');
+        }
+
+        function openInventoryModal(mode, id) {
+            editContext.module = 'inventory';
+            editContext.id = mode === 'edit' ? id : null;
+            const isView = mode === 'view';
+            const vehicle = mode !== 'create' ? getOrInitData('inventory', sampleInventory).find(v => v.id === id) : {};
+            if (mode === 'create' || mode === 'edit') {
+                document.getElementById('inventoryModel').value = vehicle.model || '';
+                document.getElementById('inventoryColor').value = vehicle.color || '';
+                document.getElementById('inventoryPrice').value = vehicle.price || '';
+                document.getElementById('inventoryReg').value = vehicle.registrationNo || '';
+                document.getElementById('inventoryFuel').value = vehicle.fuelType || '';
+                document.getElementById('inventoryTransmission').value = vehicle.transmission || '';
+                document.getElementById('inventoryStatus').value = vehicle.status || 'Available';
+                setFormFields(['inventoryModel', 'inventoryColor', 'inventoryPrice', 'inventoryReg', 'inventoryFuel', 'inventoryTransmission', 'inventoryStatus'], isView);
+                openModal('inventoryModal');
+            }
+        }
+
+        function saveInventory() {
+            const inventory = getOrInitData('inventory', sampleInventory);
+            const activities = getOrInitData('activities', sampleActivities);
+            const isEdit = editContext.module === 'inventory' && editContext.id;
+            const model = document.getElementById('inventoryModel').value;
+            const color = document.getElementById('inventoryColor').value;
+            const price = document.getElementById('inventoryPrice').value;
+            const regNo = document.getElementById('inventoryReg').value;
+            const fuel = document.getElementById('inventoryFuel').value;
+            const transmission = document.getElementById('inventoryTransmission').value;
+            const status = document.getElementById('inventoryStatus').value;
+            const vehicleData = {
+                id: isEdit ? editContext.id : `VEH-${1000 + inventory.length + 1}`,
+                model,
+                color,
+                price,
+                registrationNo: regNo,
+                fuelType: fuel,
+                transmission,
+                status,
+                mileage: '0 km',
+                features: 'Standard Features'
+            };
+            if (isEdit) {
+                const index = inventory.findIndex(v => v.id === editContext.id);
+                if (index > -1) {
+                    inventory[index] = { ...inventory[index], ...vehicleData };
+                }
+                editContext.module = null;
+                editContext.id = null;
+            } else {
+                inventory.push(vehicleData);
+            }
+            const activityMsg = isEdit ? `Updated vehicle: ${model}` : `Added vehicle to inventory: ${model}`;
+            const activityData = {
+                id: `ACT-${6000 + activities.length + 1}`,
+                type: 'System',
+                subject: activityMsg,
+                relatedTo: vehicleData.id,
+                dueDate: new Date().toLocaleDateString(),
+                priority: 'Normal',
+                status: 'Completed'
+            };
+            activities.push(activityData);
+            saveData('inventory', inventory);
+            saveData('activities', activities);
+            closeModal('inventoryModal');
+            showToast(isEdit ? 'Vehicle updated!' : 'Vehicle added to inventory!');
+            loadInventory();
+            loadActivities();
+        }
+
+        function openTradeInModal(mode, id) {
+            editContext.module = 'tradein';
+            editContext.id = mode === 'edit' ? id : null;
+            const isView = mode === 'view';
+            const tradein = mode !== 'create' ? getOrInitData('tradein', sampleTradeIns).find(t => t.id === id) : {};
+            if (mode === 'create' || mode === 'edit') {
+                document.getElementById('tradeinCustomer').value = tradein.customerName || '';
+                document.getElementById('tradeinModel').value = tradein.vehicleModel || '';
+                document.getElementById('tradeinYear').value = tradein.vehicleYear || '';
+                document.getElementById('tradeinCondition').value = tradein.condition || 'Good';
+                document.getElementById('tradeinValue').value = tradein.estimatedValue || '';
+                document.getElementById('tradeinStatus').value = tradein.status || 'Pending';
+                setFormFields(['tradeinCustomer', 'tradeinModel', 'tradeinYear', 'tradeinCondition', 'tradeinValue', 'tradeinStatus'], isView);
+                openModal('tradeinModal');
+            }
+        }
+
+        function saveTradein() {
+            const tradein = getOrInitData('tradein', sampleTradeIns);
+            const activities = getOrInitData('activities', sampleActivities);
+            const isEdit = editContext.module === 'tradein' && editContext.id;
+            const customer = document.getElementById('tradeinCustomer').value;
+            const model = document.getElementById('tradeinModel').value;
+            const year = document.getElementById('tradeinYear').value;
+            const condition = document.getElementById('tradeinCondition').value;
+            const value = document.getElementById('tradeinValue').value;
+            const status = document.getElementById('tradeinStatus').value;
+            const tradeinData = {
+                id: isEdit ? editContext.id : `TI-${1000 + tradein.length + 1}`,
+                customerName: customer,
+                vehicleModel: model,
+                vehicleYear: year,
+                condition,
+                estimatedValue: value,
+                status,
+                date: new Date().toLocaleDateString()
+            };
+            if (isEdit) {
+                const index = tradein.findIndex(t => t.id === editContext.id);
+                if (index > -1) {
+                    tradein[index] = { ...tradein[index], ...tradeinData };
+                }
+                editContext.module = null;
+                editContext.id = null;
+            } else {
+                tradein.push(tradeinData);
+            }
+            const activityMsg = isEdit ? `Updated trade-in: ${model} (${customer})` : `New trade-in valuation: ${model} (${customer}) - ${value}`;
+            const activityData = {
+                id: `ACT-${6000 + activities.length + 1}`,
+                type: 'Trade-In',
+                subject: activityMsg,
+                relatedTo: tradeinData.id,
+                dueDate: new Date().toLocaleDateString(),
+                priority: 'High',
+                status: 'Completed'
+            };
+            activities.push(activityData);
+            saveData('tradein', tradein);
+            saveData('activities', activities);
+            closeModal('tradeinModal');
+            showToast(isEdit ? 'Trade-in updated!' : 'Trade-in valuation saved!');
+            loadTradeIns();
+            loadActivities();
+        }
+
+        function openServiceModal(mode, id) {
+            editContext.module = 'service';
+            editContext.id = mode === 'edit' ? id : null;
+            const isView = mode === 'view';
+            const service = mode !== 'create' ? getOrInitData('service', sampleServices).find(s => s.id === id) : {};
+            if (mode === 'create' || mode === 'edit') {
+                document.getElementById('serviceCustomer').value = service.customerName || '';
+                document.getElementById('serviceVehicle').value = service.vehicleModel || '';
+                document.getElementById('serviceReg').value = service.regNo || '';
+                document.getElementById('serviceType').value = service.serviceType || 'Regular Maintenance';
+                document.getElementById('serviceDate').value = service.serviceDate || '';
+                document.getElementById('serviceStatus').value = service.status || 'Scheduled';
+                document.getElementById('serviceNotes').value = service.notes || '';
+                setFormFields(['serviceCustomer', 'serviceVehicle', 'serviceReg', 'serviceType', 'serviceDate', 'serviceStatus', 'serviceNotes'], isView);
+                openModal('serviceModal');
+            }
+        }
+
+        function saveService() {
+            const services = getOrInitData('service', sampleServices);
+            const activities = getOrInitData('activities', sampleActivities);
+            const isEdit = editContext.module === 'service' && editContext.id;
+            const customer = document.getElementById('serviceCustomer').value;
+            const vehicle = document.getElementById('serviceVehicle').value;
+            const reg = document.getElementById('serviceReg').value;
+            const type = document.getElementById('serviceType').value;
+            const date = document.getElementById('serviceDate').value;
+            const status = document.getElementById('serviceStatus').value;
+            const notes = document.getElementById('serviceNotes').value;
+            const serviceData = {
+                id: isEdit ? editContext.id : `SVC-${1000 + services.length + 1}`,
+                customerName: customer,
+                vehicleModel: vehicle,
+                regNo: reg,
+                serviceType: type,
+                serviceDate: date,
+                status,
+                notes
+            };
+            if (isEdit) {
+                const index = services.findIndex(s => s.id === editContext.id);
+                if (index > -1) {
+                    services[index] = { ...services[index], ...serviceData };
+                }
+                editContext.module = null;
+                editContext.id = null;
+            } else {
+                services.push(serviceData);
+            }
+            const activityMsg = isEdit ? `Updated service: ${vehicle} (${customer})` : `Scheduled service: ${type} for ${vehicle} (${customer})`;
+            const activityData = {
+                id: `ACT-${6000 + activities.length + 1}`,
+                type: 'Service',
+                subject: activityMsg,
+                relatedTo: serviceData.id,
+                dueDate: date,
+                priority: 'Normal',
+                status: 'Open'
+            };
+            activities.push(activityData);
+            saveData('service', services);
+            saveData('activities', activities);
+            closeModal('serviceModal');
+            showToast(isEdit ? 'Service updated!' : 'Service scheduled!');
+            loadServices();
+            loadActivities();
+        }
+
+        function openFinanceModal(mode, id) {
+            editContext.module = 'finance';
+            editContext.id = mode === 'edit' ? id : null;
+            const isView = mode === 'view';
+            const finance = mode !== 'create' ? getOrInitData('finance', sampleFinance).find(f => f.id === id) : {};
+            if (mode === 'create' || mode === 'edit') {
+                document.getElementById('financeCustomer').value = finance.customerName || '';
+                document.getElementById('financeVehicle').value = finance.vehicleModel || '';
+                document.getElementById('financePrice').value = finance.vehiclePrice || '';
+                document.getElementById('financeDownPayment').value = finance.downPayment || '';
+                document.getElementById('financeLoan').value = finance.loanAmount || '';
+                document.getElementById('financeEMI').value = finance.emiAmount || '';
+                document.getElementById('financeMonths').value = finance.emiMonths || '60';
+                document.getElementById('financeStatus').value = finance.status || 'Pre-Approved';
+                document.getElementById('financeBank').value = finance.bankName || '';
+                setFormFields(['financeCustomer', 'financeVehicle', 'financePrice', 'financeDownPayment', 'financeLoan', 'financeEMI', 'financeMonths', 'financeStatus', 'financeBank'], isView);
+                openModal('financeModal');
+            }
+        }
+
+        function saveFinance() {
+            const finance = getOrInitData('finance', sampleFinance);
+            const activities = getOrInitData('activities', sampleActivities);
+            const isEdit = editContext.module === 'finance' && editContext.id;
+            const customer = document.getElementById('financeCustomer').value;
+            const vehicle = document.getElementById('financeVehicle').value;
+            const price = document.getElementById('financePrice').value;
+            const downPayment = document.getElementById('financeDownPayment').value;
+            const loanAmount = document.getElementById('financeLoan').value;
+            const emiAmount = document.getElementById('financeEMI').value;
+            const emiMonths = document.getElementById('financeMonths').value;
+            const status = document.getElementById('financeStatus').value;
+            const bank = document.getElementById('financeBank').value;
+            const financeData = {
+                id: isEdit ? editContext.id : `FIN-${1000 + finance.length + 1}`,
+                customerName: customer,
+                vehicleModel: vehicle,
+                vehiclePrice: price,
+                downPayment,
+                loanAmount,
+                emiAmount,
+                emiMonths: parseInt(emiMonths),
+                status,
+                bankName: bank
+            };
+            if (isEdit) {
+                const index = finance.findIndex(f => f.id === editContext.id);
+                if (index > -1) {
+                    finance[index] = { ...finance[index], ...financeData };
+                }
+                editContext.module = null;
+                editContext.id = null;
+            } else {
+                finance.push(financeData);
+            }
+            const activityMsg = isEdit ? `Updated finance proposal: ${vehicle} (${customer})` : `New finance proposal: ${vehicle} for ${customer} - EMI ₹${emiAmount}`;
+            const activityData = {
+                id: `ACT-${6000 + activities.length + 1}`,
+                type: 'Finance',
+                subject: activityMsg,
+                relatedTo: financeData.id,
+                dueDate: new Date().toLocaleDateString(),
+                priority: 'High',
+                status: 'Open'
+            };
+            activities.push(activityData);
+            saveData('finance', finance);
+            saveData('activities', activities);
+            closeModal('financeModal');
+            showToast(isEdit ? 'Finance proposal updated!' : 'Finance proposal created!');
+            loadFinance();
+            loadActivities();
+        }
+
+        function loadShowroomMetrics() {
+            const metrics = sampleShowroom;
+            const table = document.getElementById('showroomMetricsTable');
+            table.innerHTML = metrics.map(m => `
+                <tr>
+                    <td>${m.metric}</td>
+                    <td>${m.value}</td>
+                    <td>${m.target}</td>
+                    <td><span class="badge ${m.status === 'On Track' ? 'success' : m.status === 'Close' ? 'warm' : 'hot'}">${m.status}</span></td>
+                </tr>
+            `).join('');
+        }
+
         // Dashboard card navigation with filtering
         function navigateDashboardCard(moduleId, filterType) {
             const navButton = document.querySelector(`.nav-bar button[onclick*="'${moduleId}'"]`);
@@ -4038,6 +4888,11 @@
             loadEQuotation();
             loadTestDrives();
             loadActivities();
+            loadInventory();
+            loadTradeIns();
+            loadServices();
+            loadFinance();
+            loadShowroomMetrics();
             updateDashboardCharts();
             loadTodaysFollowups();
             initTheme();

@@ -7,6 +7,9 @@ import { expect, test} from '@playwright/test'
 import testdrive from "../POM/testdrivepage.js"
 import accountpage from "../POM/accountpage.js"
 
+
+//test.use({storageState:{cookies:[],origin:[]}})
+
 // test.beforeAll('connect to DB',async()=>{
 //     console.log('DB connected')
 // })
@@ -218,9 +221,14 @@ test('Create lead with multiple data set',async({page})=>{
 })
 
 test.only("session storage",async({page})=>{
-    await page.goto("https://practicetestautomation.com/logged-in-successfully/")
-    await page.getByRole('link',{name:'Courses'}).click()
-    await page.pause()
+    
+    console.log("session stoarge");
+    await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index")
+   await page.pause()
+})
+
+test("env task",async({page})=>{
+    await page.goto('/')
 })
 
 
