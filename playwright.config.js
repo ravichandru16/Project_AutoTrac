@@ -64,7 +64,10 @@ export default defineConfig({
     {
       //smoke suite
       name:'smoke_suite',
-      testDir:'tests/smoke'
+      testDir:'tests/smoke',
+      use:{
+        headless:true,
+      }
     },
     {
       //mobile suite
