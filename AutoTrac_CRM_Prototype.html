@@ -1301,7 +1301,7 @@
             </div>
             <div class="form-group">
                 <label for="loginPassword">Password</label>
-                <input id="loginPassword" type="password" placeholder="password">
+                <input id="loginPassword" type="password" placeholder="password" onkeydown="if (event.key === 'Enter') login()">
             </div>
             <div id="loginError" class="error-message"></div>
             <button class="btn-primary" onclick="login()"><span>🔐</span> Login</button>
@@ -4396,12 +4396,28 @@
             if (username === 'admin' && password === 'password') {
                 localStorage.setItem('authUser', username);
                 errorEl.textContent = '';
-                checkAuth();
-                showToast('Logged in successfully');
-                updateDashboardCharts();
+                showTransition(() => {
+                    checkAuth();
+                    updateDashboardCharts();
+                    showToast('Logged in successfully');
+                });
             } else {
                 errorEl.textContent = 'Invalid credentials. Use admin/password.';
             }
+        }
+
+        function showTransition(callback) {
+            const transitionOverlay = document.getElementById('transitionOverlay');
+            if (!transitionOverlay) {
+                callback?.();
+                return;
+            }
+
+            transitionOverlay.classList.add('active');
+            setTimeout(() => {
+                transitionOverlay.classList.remove('active');
+                callback?.();
+            }, 1200);
         }
 
         function logout() {

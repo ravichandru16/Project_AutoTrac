@@ -1,7 +1,7 @@
 class testdrive{
     constructor(page)
     {
-        this.createbtn=page.locator("//button[contains(.,'Schedule')]")
+        this.createbtn=page.getByRole('button',{name:'Schedule'})
         this.cname=page.locator("#testdriveName")
         this.cphone=page.locator('#testdrivePhone')
         this.vehicle=page.locator('#testdriveVehicle')

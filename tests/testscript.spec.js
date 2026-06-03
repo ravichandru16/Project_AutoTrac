@@ -46,7 +46,7 @@ test('login & logout',async({page})=>{
     //await page.on('dialog',(dialog)=>{dialog.accept()})
     //login function
     await login.login()
-    await expect(page.locator("//button[contains(.,'Dashboard')]")).toBeAttached()
+    await expect(page.getByRole('button',{name:'Dashboard'})).toBeAttached()
     console.log('home page displayed')
     await page.waitForTimeout(6000)
     //logout funtion
@@ -97,7 +97,7 @@ test("created contact",async({page})=>{
     // await login.login()
     await home.contacts()
     await contact.createcontact(page)
-    const lastContactText = await page.locator("//tbody[@id='contactTable']/tr").last().textContent();
+    const lastContactText = await page.locator('#contactTable tr').last().textContent();
     await expect(lastContactText).toContain('hello')
    // await home.logout(page)
     await page.pause()
@@ -139,12 +139,12 @@ test('login, create lead with mandatory fields, validate creation, and logout', 
     const lead = new leadspage(page)
 
     await login.login()
-    await expect(page.locator("//button[contains(.,'Leads')]")).toBeVisible()
+    await expect(page.getByRole('button',{name:'Leads'})).toBeVisible()
 
     await home.leads()
     const leadPhone = await lead.createleadwithmand(page)
 
-    await expect(page.locator(`//td[contains(.,'${leadPhone}')]`)).toBeVisible({ timeout: 10000 })
+    await expect(page.locator('td', { hasText: `${leadPhone}` })).toBeVisible({ timeout: 10000 })
 
     await home.logout(page)
     await expect(login.loginbtn).toBeVisible()
@@ -173,7 +173,7 @@ test("handling windows(switching)",async({page})=>{
     ])
     //await page.pause()
     let newpage=p2
-    await newpage.locator("//a[.='Open CRM Prototype']").click()
+    await newpage.getByRole('link',{name:'Open CRM Prototype'}).click()
 })
 
 //TS-9
@@ -198,7 +198,7 @@ test.fail("creating account without account name",async({page})=>{
     //await login.login()
     await home.account()
     await account.createaccwithout()
-    await expect(page.locator("//div[@id='toast' and contains(.,'✓ Account created!')]")).toBeVisible()
+    await expect(page.locator('#toast', { hasText: '✓ Account created!' })).toBeVisible()
     console.log("bug")
     await page.pause()
 })

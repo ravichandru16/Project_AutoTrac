@@ -3,10 +3,10 @@ import homepage from "../POM/homepage"
 import {expect} from "@playwright/test"
 import ExcelUtils from "../genericmethods/readdatafromexcel.js"
 class leadspage{
-     
     constructor(page)
     {
-        this.createbtn=page.locator("//button[contains(.,'New Lead')]")
+        this.page = page
+        this.createbtn=page.getByRole('button',{name:'New Lead'})
         this.firstname=page.locator("#leadFirstName")
         this.lastname=page.locator('#leadLastName')
         this.phone=page.locator('#leadPhone')
@@ -17,32 +17,43 @@ class leadspage{
         this.excelUtils = new ExcelUtils()
 
         this.ran=randomnumgen()
-        this.clickoppo=page.locator(`//td[contains(.,'${this.ran}')]/following-sibling::td/div/button[contains(.,'Opportunity')]`)
-        this.leadid=page.locator(`//td[contains(.,'${this.ran}')]/preceding-sibling::td[contains(.,'LEAD')]`).last()
     }
+
+    getLeadRowByPhone(phone){
+        return this.page.locator('tr', { hasText: `${phone}` })
+    }
+
+    getOpportunityButtonByPhone(phone){
+        return this.getLeadRowByPhone(phone).getByRole('button',{name:'Opportunity'}).first()
+    }
+
+    getLeadIdByPhone(phone){
+        return this.getLeadRowByPhone(phone).locator('td', { hasText: 'LEAD' }).first()
+    }
+
     async createlead(page)
     {
-        //let d=new dataex()
         await this.createbtn.click()
         await this.firstname.fill('DOM')
         await this.lastname.fill("R")
-       
         await this.phone.fill(`${this.ran}`)
         await this.vehicle.selectOption('Honda City')
         await this.leadsrc.selectOption('Walk-in')
-       
         await this.leadrating.selectOption('Hot')
         await this.savebtn.click()
-        let leadid=await this.fetchleadid()
-        await this.clickoppo.click()
-        let home=new homepage(page)
+        const leadid = await this.fetchLeadIdByPhone(this.ran)
+        await this.getOpportunityButtonByPhone(this.ran).click()
+        const home=new homepage(page)
         await home.opportunities()
-        await expect((await page.locator(`//tbody[@id='opportunityTable']/tr`).last().textContent())).toContain(leadid)
-        
+        await expect((await page.locator('tbody#opportunityTable tr').last().textContent())).toContain(leadid)
     }
 
     async fetchleadid(){
-        return await this.leadid.textContent()
+        return this.fetchLeadIdByPhone(this.ran)
+    }
+
+    async fetchLeadIdByPhone(phone){
+        return await this.getLeadIdByPhone(phone).textContent()
     }
 
     async createleadwithmand(page)
@@ -50,14 +61,12 @@ class leadspage{
         await this.createbtn.click()
         await this.firstname.fill("chandru")
         await this.lastname.fill("R")
-       
         await this.phone.fill(`${this.ran}`)
         await this.vehicle.selectOption('Honda City')
         await this.leadsrc.selectOption('Walk-in')
-       
         await this.leadrating.selectOption('Hot')
         await this.savebtn.click()
-        await page.locator(`//td[contains(.,'${this.ran}')]`).waitFor({ state: 'visible', timeout: 10000 })
+        await this.getLeadRowByPhone(this.ran).waitFor({ state: 'visible', timeout: 10000 })
         console.log('lead created successfully')
         return this.ran
     }
@@ -74,8 +83,7 @@ class leadspage{
             await this.leadsrc.selectOption('Website')
             await this.leadrating.selectOption('Cold')
             await this.savebtn.click()
-           await page.waitForLoadState('load')
-           
+            await page.waitForLoadState('load')
         }
     }
 }

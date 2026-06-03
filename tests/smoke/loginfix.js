@@ -6,7 +6,7 @@ export const test=base.extend({
         await page.goto(process.env.BASE_URL)
         await page.fill("input[name='username']",process.env.USER_NAME)
         await page.fill("input[name='password']",process.env.PASSWORD)
-        await page.click("//button[.=' Login ']")
+        await page.getByRole('button',{name:'Login'}).click()
         await use(page)
     }
 })

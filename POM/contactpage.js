@@ -3,7 +3,7 @@ import {expect} from "@playwright/test"
 import {excelutils} from "../genericmethods/readdatafromexcel.js"
 class contactpage{
     constructor(page){
-        this.createcontactbtn=page.locator("//button[contains(.,'New Contact')]")
+        this.createcontactbtn=page.getByRole('button',{name:'New Contact'})
         this.cname=page.locator("#contactName")
         this.cphone=page.locator("#contactPhone")
         this.savebtn=page.getByRole('button',{name:' Save Contact'})

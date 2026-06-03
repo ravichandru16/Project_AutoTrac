@@ -3,15 +3,16 @@ import leadspage from "./leadspage"
 class homepage{
     constructor(page)
     {
-        this.profile=page.locator("//div[@class='profile-menu']")
-        this.logoutbtn=page.locator("//button[.='Logout']")
-        this.leadsbtn=page.locator("//button[contains(.,'Leads')]")
-        this.contactbtn=page.locator("//button[contains(.,'Contacts')]")
-        this.accountbtn=page.locator("//button[contains(.,'Accounts')]")
-        this.opportunitiesbtn=page.locator("//button[contains(.,'Opportunities')]")
-        this.testdrivebtn=page.locator("//button[contains(.,'Test Drives')]")
-        this.aboutus=page.locator("//a[contains(.,'about ')]")
-        this.brouchure=page.locator("//button[contains(.,'E-Brochure')]")
+        this.page = page
+        this.profile=page.locator('.profile-menu')
+        this.logoutbtn=page.getByRole('button',{name:'Logout'})
+        this.leadsbtn=page.getByRole('button',{name:'Leads'})
+        this.contactbtn=page.getByRole('button',{name:'Contacts'})
+        this.accountbtn=page.getByRole('button',{name:'Accounts'})
+        this.opportunitiesbtn=page.getByRole('button',{name:'Opportunities'})
+        this.testdrivebtn=page.getByRole('button',{name:'Test Drives'})
+        this.aboutus=page.getByRole('link',{name:/about/i})
+        this.brouchure=page.getByRole('button',{name:'E-Brochure'})
 
     }
 

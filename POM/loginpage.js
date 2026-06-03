@@ -6,7 +6,7 @@ class loginpage{
     constructor(page){
         this.username=page.locator('#loginUsername')
         this.password=page.locator('#loginPassword')
-        this.loginbtn=page.locator("//button[contains(.,'Login')]")
+        this.loginbtn=page.getByRole('button',{name:'Login'})
     }
 
     async login(){

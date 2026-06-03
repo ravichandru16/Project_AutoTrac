@@ -1,7 +1,7 @@
 class accountpage{
     constructor(page)
     {
-        this.createbtn=page.locator("//button[contains(.,'New Account')]")
+        this.createbtn=page.getByRole('button',{name:'New Account'})
         this.savebtn=page.locator("#accountSaveBtn")
     }
 
