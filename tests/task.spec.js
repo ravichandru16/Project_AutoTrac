@@ -35,7 +35,7 @@ test("task1",async({page})=>{
 
  //test("")
 
- test.only("simple",async({page})=>{
+ test("simple",async({page})=>{
     const response = await openai.responses.create({
   model: "gpt-5",
   input: "Generate login test cases"
