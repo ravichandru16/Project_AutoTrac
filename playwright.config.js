@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-import dotenv from "dotenv"
+//import dotenv from "dotenv"
 
 
 /**
@@ -14,7 +14,7 @@ import dotenv from "dotenv"
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-dotenv.config({path:`process.env.${process.env.ENV}||dev`})
+//dotenv.config({path:`process.env.${process.env.ENV}||dev`})
 export default defineConfig({
   testDir: './tests',
 

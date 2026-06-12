@@ -93,22 +93,30 @@
         /* Navigation */
         .nav-bar {
             background: white;
-            padding: 0;
+            padding: 4px 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 6px;
+            overflow-x: auto;
+            width: 100%;
         }
 
         .nav-bar button {
             background: none;
             border: none;
-            padding: 15px 25px;
+            padding: 10px 16px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             color: #475569;
             border-bottom: 3px solid transparent;
             transition: all 0.3s;
+            flex: 0 1 auto;
+            min-width: 110px;
+            white-space: normal;
+            text-align: center;
         }
 
         .nav-bar button:hover {
@@ -2080,7 +2088,13 @@
                         <td>Petrol</td>
                         <td>Manual</td>
                         <td><span class="badge success">Available</span></td>
-                        <td><div class="action-btns"><button class="btn-action btn-view" onclick="openInventoryModal('view', 'VEH-1001')">View</button></div></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-action btn-view" onclick="viewInventory('VEH-1001')">View</button>
+                                <button class="btn-action btn-edit" onclick="editInventory('VEH-1001')">Edit</button>
+                                <button class="btn-action btn-delete" onclick="deleteInventory('VEH-1001')">Delete</button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -2116,7 +2130,13 @@
                         <td><span class="badge warm">Good</span></td>
                         <td>₹3.5L</td>
                         <td><span class="badge success">Valuation Done</span></td>
-                        <td><div class="action-btns"><button class="btn-action btn-view">View</button></div></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-action btn-view" onclick="viewTradeIn('TI-1001')">View</button>
+                                <button class="btn-action btn-edit" onclick="editTradeIn('TI-1001')">Edit</button>
+                                <button class="btn-action btn-delete" onclick="deleteTradeIn('TI-1001')">Delete</button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -2152,7 +2172,13 @@
                         <td>Regular Maintenance</td>
                         <td>March 10, 2026 - 10:00 AM</td>
                         <td><span class="badge new">Scheduled</span></td>
-                        <td><div class="action-btns"><button class="btn-action btn-view">View</button></div></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-action btn-view" onclick="viewService('SVC-1001')">View</button>
+                                <button class="btn-action btn-edit" onclick="editService('SVC-1001')">Edit</button>
+                                <button class="btn-action btn-delete" onclick="deleteService('SVC-1001')">Delete</button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -2192,7 +2218,13 @@
                         <td>60 months</td>
                         <td><span class="badge hot">Pre-Approved</span></td>
                         <td>HDFC Bank</td>
-                        <td><div class="action-btns"><button class="btn-action btn-view">View</button></div></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-action btn-view" onclick="viewFinance('FIN-1001')">View</button>
+                                <button class="btn-action btn-edit" onclick="editFinance('FIN-1001')">Edit</button>
+                                <button class="btn-action btn-delete" onclick="deleteFinance('FIN-1001')">Delete</button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -2589,7 +2621,7 @@
     <div id="inventoryModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Add Vehicle to Inventory</h2>
+                <h2 id="inventoryModalTitle" class="modal-title">Add Vehicle to Inventory</h2>
                 <button class="close-btn" onclick="closeModal('inventoryModal')">&times;</button>
             </div>
             <form>
@@ -2604,7 +2636,7 @@
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-cancel" onclick="closeModal('inventoryModal')">Cancel</button>
-                    <button type="button" class="btn-primary" onclick="saveInventory()"><span>💾</span> Save Vehicle</button>
+                    <button id="inventorySaveBtn" type="button" class="btn-primary" onclick="saveInventory()"><span>💾</span> Save Vehicle</button>
                 </div>
             </form>
         </div>
@@ -2613,7 +2645,7 @@
     <div id="tradeinModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Trade-In Valuation</h2>
+                <h2 id="tradeinModalTitle" class="modal-title">Trade-In Valuation</h2>
                 <button class="close-btn" onclick="closeModal('tradeinModal')">&times;</button>
             </div>
             <form>
@@ -2627,7 +2659,7 @@
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-cancel" onclick="closeModal('tradeinModal')">Cancel</button>
-                    <button type="button" class="btn-primary" onclick="saveTradein()"><span>💾</span> Save Valuation</button>
+                    <button id="tradeinSaveBtn" type="button" class="btn-primary" onclick="saveTradein()"><span>💾</span> Save Valuation</button>
                 </div>
             </form>
         </div>
@@ -2636,7 +2668,7 @@
     <div id="serviceModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Book Service</h2>
+                <h2 id="serviceModalTitle" class="modal-title">Book Service</h2>
                 <button class="close-btn" onclick="closeModal('serviceModal')">&times;</button>
             </div>
             <form>
@@ -2651,7 +2683,7 @@
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-cancel" onclick="closeModal('serviceModal')">Cancel</button>
-                    <button type="button" class="btn-primary" onclick="saveService()"><span>💾</span> Book Service</button>
+                    <button id="serviceSaveBtn" type="button" class="btn-primary" onclick="saveService()"><span>💾</span> Book Service</button>
                 </div>
             </form>
         </div>
@@ -2660,7 +2692,7 @@
     <div id="financeModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Finance Proposal</h2>
+                <h2 id="financeModalTitle" class="modal-title">Finance Proposal</h2>
                 <button class="close-btn" onclick="closeModal('financeModal')">&times;</button>
             </div>
             <form>
@@ -2677,7 +2709,7 @@
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-cancel" onclick="closeModal('financeModal')">Cancel</button>
-                    <button type="button" class="btn-primary" onclick="saveFinance()"><span>💾</span> Save Proposal</button>
+                    <button id="financeSaveBtn" type="button" class="btn-primary" onclick="saveFinance()"><span>💾</span> Save Proposal</button>
                 </div>
             </form>
         </div>
@@ -4341,6 +4373,93 @@
             openTestDriveModal('edit', id);
         }
 
+        function openInventoryModal(mode, id) {
+            editContext.module = 'inventory';
+            editContext.id = mode === 'edit' ? id : null;
+            const isView = mode === 'view';
+            const vehicle = mode !== 'create' ? getOrInitData('inventory', sampleInventory).find(v => v.id === id) : {};
+            if (!vehicle && mode !== 'create') {
+                showToast('Inventory item not found.', 'error');
+                return;
+            }
+            if (mode === 'create' || mode === 'edit' || mode === 'view') {
+                document.getElementById('inventoryModel').value = vehicle.model || '';
+                document.getElementById('inventoryColor').value = vehicle.color || '';
+                document.getElementById('inventoryPrice').value = vehicle.price || '';
+                document.getElementById('inventoryReg').value = vehicle.registrationNo || '';
+                document.getElementById('inventoryFuel').value = vehicle.fuelType || '';
+                document.getElementById('inventoryTransmission').value = vehicle.transmission || '';
+                document.getElementById('inventoryStatus').value = vehicle.status || 'Available';
+                setModalState('inventoryModalTitle', 'inventorySaveBtn', mode === 'create' ? 'Add Vehicle to Inventory' : isView ? 'View Vehicle' : 'Edit Vehicle', !isView, isView, mode === 'edit' ? 'Update Vehicle' : 'Save Vehicle');
+                setFormFields(['inventoryModel', 'inventoryColor', 'inventoryPrice', 'inventoryReg', 'inventoryFuel', 'inventoryTransmission', 'inventoryStatus'], isView);
+                openModal('inventoryModal');
+            }
+        }
+
+        function viewInventory(id) {
+            openInventoryModal('view', id);
+        }
+
+        function editInventory(id) {
+            openInventoryModal('edit', id);
+        }
+
+        function deleteInventory(id) {
+            if (!confirm('Are you sure you want to delete this inventory item?')) return;
+            const inventory = getOrInitData('inventory', sampleInventory).filter(item => item.id !== id);
+            saveData('inventory', inventory);
+            showToast('Inventory item deleted.');
+            loadInventory();
+        }
+
+        function viewTradeIn(id) {
+            openTradeInModal('view', id);
+        }
+
+        function editTradeIn(id) {
+            openTradeInModal('edit', id);
+        }
+
+        function deleteTradeIn(id) {
+            if (!confirm('Are you sure you want to delete this trade-in record?')) return;
+            const tradeins = getOrInitData('tradein', sampleTradeIns).filter(item => item.id !== id);
+            saveData('tradein', tradeins);
+            showToast('Trade-in record deleted.');
+            loadTradeIns();
+        }
+
+        function viewService(id) {
+            openServiceModal('view', id);
+        }
+
+        function editService(id) {
+            openServiceModal('edit', id);
+        }
+
+        function deleteService(id) {
+            if (!confirm('Are you sure you want to delete this service record?')) return;
+            const services = getOrInitData('service', sampleServices).filter(item => item.id !== id);
+            saveData('service', services);
+            showToast('Service record deleted.');
+            loadServices();
+        }
+
+        function viewFinance(id) {
+            openFinanceModal('view', id);
+        }
+
+        function editFinance(id) {
+            openFinanceModal('edit', id);
+        }
+
+        function deleteFinance(id) {
+            if (!confirm('Are you sure you want to delete this finance proposal?')) return;
+            const finance = getOrInitData('finance', sampleFinance).filter(item => item.id !== id);
+            saveData('finance', finance);
+            showToast('Finance proposal deleted.');
+            loadFinance();
+        }
+
         function setActivityForm(activity = {}) {
             document.getElementById('activitySubject').value = activity.subject || '';
             document.getElementById('activityType').value = activity.type || '';
@@ -4474,27 +4593,86 @@
                     <td>${v.fuelType}</td>
                     <td>${v.transmission}</td>
                     <td><span class="badge ${v.status.toLowerCase()}">${v.status}</span></td>
-                    <td><div class="action-btns"><button class="btn-action btn-view" onclick="viewInventory('${v.id}')">View</button></div></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-action btn-view" onclick="viewInventory('${v.id}')">View</button>
+                            <button class="btn-action btn-edit" onclick="editInventory('${v.id}')">Edit</button>
+                            <button class="btn-action btn-delete" onclick="deleteInventory('${v.id}')">Delete</button>
+                        </div>
+                    </td>
                 </tr>
             `).join('');
         }
 
-        function openInventoryModal(mode, id) {
-            editContext.module = 'inventory';
-            editContext.id = mode === 'edit' ? id : null;
-            const isView = mode === 'view';
-            const vehicle = mode !== 'create' ? getOrInitData('inventory', sampleInventory).find(v => v.id === id) : {};
-            if (mode === 'create' || mode === 'edit') {
-                document.getElementById('inventoryModel').value = vehicle.model || '';
-                document.getElementById('inventoryColor').value = vehicle.color || '';
-                document.getElementById('inventoryPrice').value = vehicle.price || '';
-                document.getElementById('inventoryReg').value = vehicle.registrationNo || '';
-                document.getElementById('inventoryFuel').value = vehicle.fuelType || '';
-                document.getElementById('inventoryTransmission').value = vehicle.transmission || '';
-                document.getElementById('inventoryStatus').value = vehicle.status || 'Available';
-                setFormFields(['inventoryModel', 'inventoryColor', 'inventoryPrice', 'inventoryReg', 'inventoryFuel', 'inventoryTransmission', 'inventoryStatus'], isView);
-                openModal('inventoryModal');
-            }
+        function loadTradeIns() {
+            const tradeins = getOrInitData('tradein', sampleTradeIns);
+            const table = document.getElementById('tradeinTable');
+            table.innerHTML = tradeins.map(t => `
+                <tr>
+                    <td>${t.id}</td>
+                    <td>${t.customerName}</td>
+                    <td>${t.vehicleModel}</td>
+                    <td>${t.vehicleYear}</td>
+                    <td><span class="badge warm">${t.condition}</span></td>
+                    <td>${t.estimatedValue}</td>
+                    <td><span class="badge success">${t.status}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-action btn-view" onclick="viewTradeIn('${t.id}')">View</button>
+                            <button class="btn-action btn-edit" onclick="editTradeIn('${t.id}')">Edit</button>
+                            <button class="btn-action btn-delete" onclick="deleteTradeIn('${t.id}')">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadServices() {
+            const services = getOrInitData('service', sampleServices);
+            const table = document.getElementById('serviceTable');
+            table.innerHTML = services.map(s => `
+                <tr>
+                    <td>${s.id}</td>
+                    <td>${s.customerName}</td>
+                    <td>${s.vehicleModel}</td>
+                    <td>${s.regNo}</td>
+                    <td>${s.serviceType}</td>
+                    <td>${s.serviceDate}</td>
+                    <td><span class="badge ${s.status === 'Scheduled' ? 'new' : 'success'}">${s.status}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-action btn-view" onclick="viewService('${s.id}')">View</button>
+                            <button class="btn-action btn-edit" onclick="editService('${s.id}')">Edit</button>
+                            <button class="btn-action btn-delete" onclick="deleteService('${s.id}')">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadFinance() {
+            const financeItems = getOrInitData('finance', sampleFinance);
+            const table = document.getElementById('financeTable');
+            table.innerHTML = financeItems.map(f => `
+                <tr>
+                    <td>${f.id}</td>
+                    <td>${f.customerName}</td>
+                    <td>${f.vehicleModel}</td>
+                    <td>${f.vehiclePrice}</td>
+                    <td>${f.loanAmount}</td>
+                    <td>${f.emiAmount}</td>
+                    <td>${f.emiMonths} months</td>
+                    <td><span class="badge ${f.status.toLowerCase()}">${f.status}</span></td>
+                    <td>${f.bankName}</td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-action btn-view" onclick="viewFinance('${f.id}')">View</button>
+                            <button class="btn-action btn-edit" onclick="editFinance('${f.id}')">Edit</button>
+                            <button class="btn-action btn-delete" onclick="deleteFinance('${f.id}')">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
         }
 
         function saveInventory() {
@@ -4554,13 +4732,18 @@
             editContext.id = mode === 'edit' ? id : null;
             const isView = mode === 'view';
             const tradein = mode !== 'create' ? getOrInitData('tradein', sampleTradeIns).find(t => t.id === id) : {};
-            if (mode === 'create' || mode === 'edit') {
+            if (!tradein && mode !== 'create') {
+                showToast('Trade-in record not found.', 'error');
+                return;
+            }
+            if (mode === 'create' || mode === 'edit' || mode === 'view') {
                 document.getElementById('tradeinCustomer').value = tradein.customerName || '';
                 document.getElementById('tradeinModel').value = tradein.vehicleModel || '';
                 document.getElementById('tradeinYear').value = tradein.vehicleYear || '';
                 document.getElementById('tradeinCondition').value = tradein.condition || 'Good';
                 document.getElementById('tradeinValue').value = tradein.estimatedValue || '';
                 document.getElementById('tradeinStatus').value = tradein.status || 'Pending';
+                setModalState('tradeinModalTitle', 'tradeinSaveBtn', mode === 'create' ? 'Trade-In Valuation' : isView ? 'View Trade-In' : 'Edit Trade-In', !isView, isView, mode === 'edit' ? 'Update Valuation' : 'Save Valuation');
                 setFormFields(['tradeinCustomer', 'tradeinModel', 'tradeinYear', 'tradeinCondition', 'tradeinValue', 'tradeinStatus'], isView);
                 openModal('tradeinModal');
             }
@@ -4620,7 +4803,11 @@
             editContext.id = mode === 'edit' ? id : null;
             const isView = mode === 'view';
             const service = mode !== 'create' ? getOrInitData('service', sampleServices).find(s => s.id === id) : {};
-            if (mode === 'create' || mode === 'edit') {
+            if (!service && mode !== 'create') {
+                showToast('Service record not found.', 'error');
+                return;
+            }
+            if (mode === 'create' || mode === 'edit' || mode === 'view') {
                 document.getElementById('serviceCustomer').value = service.customerName || '';
                 document.getElementById('serviceVehicle').value = service.vehicleModel || '';
                 document.getElementById('serviceReg').value = service.regNo || '';
@@ -4628,6 +4815,7 @@
                 document.getElementById('serviceDate').value = service.serviceDate || '';
                 document.getElementById('serviceStatus').value = service.status || 'Scheduled';
                 document.getElementById('serviceNotes').value = service.notes || '';
+                setModalState('serviceModalTitle', 'serviceSaveBtn', mode === 'create' ? 'Book Service' : isView ? 'View Service' : 'Edit Service', !isView, isView, mode === 'edit' ? 'Update Service' : 'Book Service');
                 setFormFields(['serviceCustomer', 'serviceVehicle', 'serviceReg', 'serviceType', 'serviceDate', 'serviceStatus', 'serviceNotes'], isView);
                 openModal('serviceModal');
             }
@@ -4688,7 +4876,11 @@
             editContext.id = mode === 'edit' ? id : null;
             const isView = mode === 'view';
             const finance = mode !== 'create' ? getOrInitData('finance', sampleFinance).find(f => f.id === id) : {};
-            if (mode === 'create' || mode === 'edit') {
+            if (!finance && mode !== 'create') {
+                showToast('Finance proposal not found.', 'error');
+                return;
+            }
+            if (mode === 'create' || mode === 'edit' || mode === 'view') {
                 document.getElementById('financeCustomer').value = finance.customerName || '';
                 document.getElementById('financeVehicle').value = finance.vehicleModel || '';
                 document.getElementById('financePrice').value = finance.vehiclePrice || '';
@@ -4698,6 +4890,7 @@
                 document.getElementById('financeMonths').value = finance.emiMonths || '60';
                 document.getElementById('financeStatus').value = finance.status || 'Pre-Approved';
                 document.getElementById('financeBank').value = finance.bankName || '';
+                setModalState('financeModalTitle', 'financeSaveBtn', mode === 'create' ? 'Finance Proposal' : isView ? 'View Proposal' : 'Edit Proposal', !isView, isView, mode === 'edit' ? 'Update Proposal' : 'Save Proposal');
                 setFormFields(['financeCustomer', 'financeVehicle', 'financePrice', 'financeDownPayment', 'financeLoan', 'financeEMI', 'financeMonths', 'financeStatus', 'financeBank'], isView);
                 openModal('financeModal');
             }

@@ -1,4 +1,4 @@
-const {test:setup}=require('@playwright/test')
+const {test:setup,expect}=require('@playwright/test')
 const path = require('path')
 
 const setupfile=path.join(__dirname,"../playwright/setupfile.json")
@@ -13,4 +13,5 @@ setup("global setup",async({browser})=>{
 
    await page.waitForLoadState('networkidle')
    await context.storageState({path:setupfile})
+ 
 })
