@@ -1,0 +1,704 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: myntra.spec.js >> irctc-1
+- Location: tests\myntra.spec.js:123:6
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - banner "Header" [ref=e4]:
+      - generic [ref=e5]:
+        - banner [ref=e6]:
+          - generic [ref=e7]:
+            - img "Indian railway logo" [ref=e9]
+            - img "IRCTC Logo" [ref=e11]
+          - generic [ref=e14] [cursor=pointer]: 
+          - text:   
+        - text:             
+    - generic [ref=e18]:
+      - text:  
+      - generic [ref=e19]:
+        - generic:
+          - generic [ref=e21]:
+            - generic [ref=e22]:
+              - generic [ref=e23]:
+                - generic [ref=e25]: 
+                - searchbox "FROM *" [ref=e28]: KSR BENGALURU - SBC
+                - generic:
+                  - generic [ref=e30] [cursor=pointer]: 
+                  - text: 
+              - generic [ref=e31]:
+                - generic [ref=e33]: 
+                - searchbox "TO *" [ref=e36]: MUMBAI CENTRAL - BCT (MUMBAI)
+              - generic [ref=e37]:
+                - generic [ref=e39]: 
+                - textbox "DD/MM/YYYY *" [ref=e42]: 20/07/2026
+              - generic [ref=e43]:
+                - generic [ref=e45]: 
+                - generic [ref=e47] [cursor=pointer]:
+                  - generic [ref=e48]:
+                    - listbox "AC 2 Tier (2A)"
+                  - generic [ref=e50]: AC 2 Tier (2A)
+                  - button "" [ref=e51]:
+                    - generic [ref=e52]: 
+              - generic [ref=e53]:
+                - generic [ref=e55]: 
+                - generic [ref=e57] [cursor=pointer]:
+                  - generic [ref=e58]:
+                    - listbox "GENERAL"
+                  - generic [ref=e60]: GENERAL
+                  - button "" [ref=e61]:
+                    - generic [ref=e62]: 
+            - generic [ref=e63]:
+              - generic [ref=e64]:
+                - checkbox "Check to fetch trains runs on other days than you are searching for." [ref=e65]
+                - generic [ref=e66] [cursor=pointer]: Flexible With Date
+              - generic [ref=e67]:
+                - checkbox "Check for DIVYAANG Concession Booking." [ref=e68]
+                - generic [ref=e69] [cursor=pointer]: Person With Disability Concession
+              - generic [ref=e70]:
+                - checkbox "Check for pass Booking" [ref=e71]
+                - generic [ref=e72] [cursor=pointer]: Railway Pass Concession
+          - button "Modify Search" [ref=e74] [cursor=pointer]
+      - text:                   
+      - generic [ref=e76]:
+        - generic [ref=e77]:
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - strong:
+                - generic [ref=e82]: Refine Results
+                - generic [ref=e83] [cursor=pointer]: Remove Filter
+            - generic [ref=e85]:
+              - generic [ref=e86]:
+                - generic [ref=e88]:
+                  - text: JOURNEY CLASS
+                  - generic [ref=e89] [cursor=pointer]: Select All
+                - tab "" [expanded] [ref=e90] [cursor=pointer]:
+                  - generic [ref=e91]: 
+              - region "JOURNEY CLASS Select All " [ref=e92]:
+                - table [ref=e94]:
+                  - row "AC First Class (1A) AC 2 Tier (2A) AC 3 Tier (3A) AC 3 Economy (3E) Sleeper (SL)" [ref=e95]:
+                    - cell "AC First Class (1A)" [ref=e96]:
+                      - checkbox [ref=e97]
+                      - generic [ref=e98] [cursor=pointer]: AC First Class (1A)
+                    - cell "AC 2 Tier (2A)" [ref=e99]:
+                      - checkbox [checked] [ref=e100]
+                      - generic [ref=e101] [cursor=pointer]: AC 2 Tier (2A)
+                    - cell "AC 3 Tier (3A)" [ref=e102]:
+                      - checkbox [ref=e103]
+                      - generic [ref=e104] [cursor=pointer]: AC 3 Tier (3A)
+                    - cell "AC 3 Economy (3E)" [ref=e105]:
+                      - checkbox [ref=e106]
+                      - generic [ref=e107] [cursor=pointer]: AC 3 Economy (3E)
+                    - cell "Sleeper (SL)" [ref=e108]:
+                      - checkbox [ref=e109]
+                      - generic [ref=e110] [cursor=pointer]: Sleeper (SL)
+            - generic [ref=e112]:
+              - generic [ref=e113]:
+                - generic [ref=e115]:
+                  - text: TRAIN TYPE
+                  - generic [ref=e116] [cursor=pointer]: Select All
+                - tab "" [expanded] [ref=e117] [cursor=pointer]:
+                  - generic [ref=e118]: 
+              - region "TRAIN TYPE Select All " [ref=e119]:
+                - table [ref=e121]:
+                  - row "OTHER" [ref=e122]:
+                    - cell "OTHER" [ref=e123]:
+                      - checkbox [checked] [ref=e124]
+                      - generic [ref=e125] [cursor=pointer]: OTHER
+            - generic [ref=e127]:
+              - generic [ref=e128]:
+                - generic [ref=e130]:
+                  - text: DEPARTURE TIME
+                  - generic [ref=e131] [cursor=pointer]: Select All
+                - tab "" [expanded] [ref=e132] [cursor=pointer]:
+                  - generic [ref=e133]: 
+              - region "DEPARTURE TIME Select All " [ref=e134]:
+                - table [ref=e136]:
+                  - row "00:00 - 06:00 Early Morning 06:00 - 12:00 Morning 12:00 - 18:00 Mid Day 18:00 - 24:00 Night" [ref=e137]:
+                    - strong:
+                      - cell "00:00 - 06:00 Early Morning" [ref=e138]:
+                        - text: 00:00 - 06:00
+                        - text: Early Morning
+                      - cell "06:00 - 12:00 Morning" [ref=e139]:
+                        - text: 06:00 - 12:00
+                        - text: Morning
+                      - cell "12:00 - 18:00 Mid Day" [ref=e140]:
+                        - text: 12:00 - 18:00
+                        - text: Mid Day
+                      - cell "18:00 - 24:00 Night" [ref=e141]:
+                        - text: 18:00 - 24:00
+                        - text: Night
+            - generic [ref=e148]:
+              - generic [ref=e149]: 00:00 Hrs
+              - generic [ref=e150]: 24:00 Hrs
+            - generic [ref=e152]:
+              - generic [ref=e153]:
+                - generic [ref=e155]:
+                  - text: ARRIVAL TIME
+                  - generic [ref=e156] [cursor=pointer]: Select All
+                - tab "" [expanded] [ref=e157] [cursor=pointer]:
+                  - generic [ref=e158]: 
+              - region "ARRIVAL TIME Select All " [ref=e159]:
+                - table [ref=e161]:
+                  - row "00:00 - 06:00 Early Morning 06:00 - 12:00 Morning 12:00 - 18:00 Mid Day 18:00 - 24:00 Night" [ref=e162]:
+                    - strong:
+                      - cell "00:00 - 06:00 Early Morning" [ref=e163]:
+                        - text: 00:00 - 06:00
+                        - text: Early Morning
+                      - cell "06:00 - 12:00 Morning" [ref=e164]:
+                        - text: 06:00 - 12:00
+                        - text: Morning
+                      - cell "12:00 - 18:00 Mid Day" [ref=e165]:
+                        - text: 12:00 - 18:00
+                        - text: Mid Day
+                      - cell "18:00 - 24:00 Night" [ref=e166]:
+                        - text: 18:00 - 24:00
+                        - text: Night
+            - generic [ref=e173]:
+              - generic [ref=e174]: 00:00 Hrs
+              - generic [ref=e175]: 24:00 Hrs
+            - generic [ref=e177]:
+              - generic [ref=e178]:
+                - generic [ref=e180]:
+                  - text: FROM STATIONS
+                  - generic [ref=e181] [cursor=pointer]: Select All
+                - tab "" [expanded] [ref=e182] [cursor=pointer]:
+                  - generic [ref=e183]: 
+              - region "FROM STATIONS Select All " [ref=e184]:
+                - table [ref=e186]:
+                  - row "KRISHNARAJAPURM KSR BENGALURU WHITEFIELD YESVANTPUR JN" [ref=e187]:
+                    - cell "KRISHNARAJAPURM" [ref=e188]:
+                      - checkbox [checked] [ref=e189]
+                      - generic [ref=e190] [cursor=pointer]: KRISHNARAJAPURM
+                    - cell "KSR BENGALURU" [ref=e191]:
+                      - checkbox [checked] [ref=e192]
+                      - generic [ref=e193] [cursor=pointer]: KSR BENGALURU
+                    - cell "WHITEFIELD" [ref=e194]:
+                      - checkbox [checked] [ref=e195]
+                      - generic [ref=e196] [cursor=pointer]: WHITEFIELD
+                    - cell "YESVANTPUR JN" [ref=e197]:
+                      - checkbox [checked] [ref=e198]
+                      - generic [ref=e199] [cursor=pointer]: YESVANTPUR JN
+            - generic [ref=e201]:
+              - generic [ref=e202]:
+                - generic [ref=e204]:
+                  - text: TO STATIONS
+                  - generic [ref=e205] [cursor=pointer]: Select All
+                - tab "" [expanded] [ref=e206] [cursor=pointer]:
+                  - generic [ref=e207]: 
+              - region "TO STATIONS Select All " [ref=e208]:
+                - table [ref=e210]:
+                  - row "VASAI ROAD C SHIVAJI MAH T DADAR LOKMANYATILAK T" [ref=e211]:
+                    - cell "VASAI ROAD" [ref=e212]:
+                      - checkbox [checked] [ref=e213]
+                      - generic [ref=e214] [cursor=pointer]: VASAI ROAD
+                    - cell "C SHIVAJI MAH T" [ref=e215]:
+                      - checkbox [checked] [ref=e216]
+                      - generic [ref=e217] [cursor=pointer]: C SHIVAJI MAH T
+                    - cell "DADAR" [ref=e218]:
+                      - checkbox [checked] [ref=e219]
+                      - generic [ref=e220] [cursor=pointer]: DADAR
+                    - cell "LOKMANYATILAK T" [ref=e221]:
+                      - checkbox [checked] [ref=e222]
+                      - generic [ref=e223] [cursor=pointer]: LOKMANYATILAK T
+          - iframe [ref=e226]:
+            - link [ref=f36e2] [cursor=pointer]:
+              - /url: https://googleads.g.doubleclick.net/pcs/click?xai=AKAOjstyb2Lfnv4RnqRjeaKigHp-uHGyo41J77PdKVWXpBzQqhpr0l5phlby2CS3pryYafhxz-RYccDskbSnRHYLF33x81dC_RJKazyRC8ELellfjmp6AzoeiCHeNif2wPwLGwGjTO3OprBe5et7beeSVdH1_7P24ljYTBz4_72qMZIo6b2S4tqKwL6jUJ8VHX_DdB1nhduWKoEZ18aX_pbchu4-5lSqS4eowLM2vg6FNfIc_j9mCYYEdhHmtehgeKaTASWrjDxIcpWXJY-fh6sAsYIDV9ecDYH5vE1aHUQbteW2lhEqIYRqutJJHcEWWrvreSPCr3Eexc-j4KdvTjFk7jwuogvneVZVUSCLo3XsEaFUSTo0X16WR36DRj5vJNSZX0JZ5a-ZZ1PJw_Iu3r73&sai=AMfl-YSmwyiEW50YxVVAcGBBea5Fmx07WZjnGgiX1BFOBglQuauuLqU7ZlZ9Vz2nlmNre8O9t42NPUsb7vwSueeZMYrbNcP6AXD-Ydl_c8M1Y1fLiMWq3MrwFTVHnEg1PYcIj_6Q0mjiUHDTf_Fs9ZIZxoQglpgq6Du4-Ne4dqTCfkuCu-q9Teq3aZY2i9c8UEjt3u-LriVOJ2ms_OvYoW2gME9ISO-nuLi--OOMo31Qt5Hb2mEHqsSRR4_dxFjKx4gZsqW75kWbbqSTntlCQZ4NyhzOzEiC1Ldu1_7HzvDf4SLcc4en4euZsF6Hwpwx4uFpkYsXb2pA9S5lIUy8pgF1JG1gtodsB9IKSNg5Xjx0JJzG5gh6a7zTLKt26o0GQlWQFKlzYZJL8SdfCWWYbS3Tfco&sig=Cg0ArKJSzOMDgreWVVxT&fbs_aeid=%5Bgw_fbsaeid%5D&adurl=https://sbi.bank.in/
+          - iframe [ref=e229]:
+            - link [ref=f37e2] [cursor=pointer]:
+              - /url: https://googleads.g.doubleclick.net/pcs/click?xai=AKAOjsuUjawsJRdOVoZbGJ5MAvFFwpQhSNMEcDNOglO-em56hL33ou0hdYgTYTA6uBNDJZ5oHS0Nb84u6S5i7QyI6iKF4hgHQ9f0NTeQXOSSE5PvafXu1cCuCRnGJJs-sBwM-O4AmedPY4f5EBpZqGmyS5pT3KZdaTTIPFHnGELLcXzFiyLzVtAmMpWNsYsdJQYE19zErupGmjpekDT-_cdhLIKNUFbPsg7AZSq_wl2TDEbr9eofiEerzTqA57NfSXUyGHP6mgFLFFofON8ddY8YpJFGdD_V_EvDruklBguRJdxDD4T7d748Ku0WDOXuh8fXu1rbe8zLbOaQHX8Kn696Mb6DRRpNsq6cqfWRenNi-jnb05MSiAlWuWQOPXSc6XvMlJ-3DwaYpfwqlDzisLqVH9MDdFqQxzZIXV5A2ye3ScO2QP9LaLt1&sai=AMfl-YRA-CfeDFYWIv--548fcFrHWYY68uaO0sapC4AjLoTX8NlkVPgED71y_lCaSH-EtgWMSEzPmZpGOx1Zh5DMP0kLaEoqk6RzCbw8NhXdQNggCul-LQAL8CP44RsqOUaVMNAzog3qi3qYpcb9ojoOXpWLHHIBao1v61ilOdqnGm68ol9Qi_G-udxc5I_lF0irpBIAWksayQ8M4Z4mWeQDJUbainYtTVeYUQnRbX4_tZfHTMlZ5Boh-md75UPNZxnGfV_JURTXgLPm2J1uLBSeLaKPAowuqK55tw59nI2v4mCCG8O0NvrthDuHnJaUuiidLGDsHgeTqQcCGHIzkXUoA2Nu-35r75PoQm3NyWWA_vo8nfn7F6fqpFbcjkgBi7XPlqIjg7l9ecpgk_ZXX9xv2lU&sig=Cg0ArKJSzOCbjcDAM52E&fbs_aeid=%5Bgw_fbsaeid%5D&adurl=https://www.bus.irctc.co.in/home
+        - generic [ref=e233]:
+          - generic "6. Result for and displayed for your query" [active] [ref=e234]:
+            - generic [ref=e235]:
+              - text: 6 Results for
+              - strong [ref=e236]:
+                - text: KSR BENGALURU
+                - generic [ref=e237]: 
+                - text: MUMBAI CENTRAL | Mon, 20 Jul 2026
+              - text: For Quota | General
+          - generic:
+            - button "Sort By | Departure" [ref=e240] [cursor=pointer]
+            - generic [ref=e241]:
+              - button " Previous Day" [ref=e242] [cursor=pointer]:
+                - generic [ref=e243]: 
+                - text: Previous Day
+              - button "Next Day " [ref=e244] [cursor=pointer]:
+                - text: Next Day
+                - generic [ref=e245]: 
+              - text: 
+          - generic [ref=e247]:
+            - iframe [ref=e251]:
+              - link [ref=f34e2] [cursor=pointer]:
+                - /url: https://googleads.g.doubleclick.net/pcs/click?xai=AKAOjssTJO5KVvUJZnOh-59HR7gJIrfnl06CKPX58nVkm8EDS3NvEZ1LLAjF-sjTbXk0nZc4h1AbfFdPbgqGd80a-VGjLT3o7NplMkRGf1Wq33cY52VWONcUGQvcizOvplZX0gbqsLQ7T-v8TG89NM0Vjuh6uZfCy6VxXJTazTp0bjZQYQmejxtV19yvmWy1AByd2tRu4kLWu2aJRlrtiQsNSRGiukYnxaReZCiUyGLLAJeFXRCWd0bxrtGPdLNLP3g3uxClsE5XjlplU_WVyY9ep8PVr2uryDqLfUJiV_mUZkbuOeuCKpk6kQP7pOqmsTvdL88NsW8lU_wVFoHcgwk1KoHKmC08jDrZCfItKAlnXQZ9iiInETtUH36Fn4m-fMn1HInQs6WP16kR4wiKKFRa9XjJQL2XOTF37olKdSKbhceEKJk&sai=AMfl-YQjTbQhK5Ozs-H_9pEzxs-BBhYNI3hwyXejgCOqWNnh2I6lxp5ql0w-iZNv7Aib_ch4yt1RLNNdEB1X1ysfL7eDoYB95QW6yRcoeSmnchfGrtgVZdff668SPNUBMDENR85BKlOJ95UQo_NYP4eOb81VF8WZRp98wuvSzbqDWmCmX_LWxrWdnY3NSY38_Xc6rHp7T7-uetsB_pDsxq-rpZWCWimHETFWog5-9mcpG8T1CsnifpC20pD8tQgN15JqUiW3XRMTg1cACGf9Q7JfAquUTNvh0rtxL73zBR64HqqHDxGP4TSxId9eiBLOmrLAD8Bt-zXI6ncrI6Rju3iG9_OC9kzRHpIXJXj4rSyaNeQNVr3DfY5b5iQhge7noxWUA7hfiIocobYZ-2QFmtbnHCk&sig=Cg0ArKJSzAkq5n_RH-Aa&fbs_aeid=%5Bgw_fbsaeid%5D&adurl=https://consumeraffairs.gov.in/
+            - generic [ref=e252]:
+              - generic:
+                - generic:
+                  - generic [ref=e253]:
+                    - strong [ref=e256]: CHALUKYA EXPRESS (11006)
+                    - generic [ref=e257]:
+                      - generic [ref=e258]: "Runs On: MTWTFSS"
+                      - strong [ref=e260]:
+                        - generic [ref=e261] [cursor=pointer]: Train Schedule 
+                  - generic [ref=e263]:
+                    - generic [ref=e264]:
+                      - strong [ref=e266]: 04:25 |
+                      - text: WHITEFIELD | Mon, 20 Jul
+                    - generic [ref=e267]:
+                      - generic [ref=e268]: 25:20
+                      - generic [ref=e269]:
+                        - strong [ref=e270]: 05:45 |
+                        - text: DADAR | Tue, 21 Jul
+                  - table [ref=e276]:
+                    - row "Sleeper (SL) Refresh  AC 3 Tier (3A) Refresh  AC 2 Tier (2A) Refresh " [ref=e277]:
+                      - cell "Sleeper (SL) Refresh " [ref=e278]:
+                        - generic [ref=e279]:
+                          - strong [ref=e281]: Sleeper (SL)
+                          - generic [ref=e282] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e283]: 
+                      - cell "AC 3 Tier (3A) Refresh " [ref=e284]:
+                        - generic [ref=e285]:
+                          - strong [ref=e287]: AC 3 Tier (3A)
+                          - generic [ref=e288] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e289]: 
+                      - cell "AC 2 Tier (2A) Refresh " [ref=e290]:
+                        - generic [ref=e291]:
+                          - strong [ref=e293]: AC 2 Tier (2A)
+                          - generic [ref=e294] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e295]: 
+                  - strong [ref=e300]:
+                    - generic [ref=e301]:
+                      - text: Please check NTES website or
+                      - link "NTES app" [ref=e302] [cursor=pointer]:
+                        - /url: https://play.google.com/store/apps/details?id=cris.icms.ntes
+                      - text: for actual time before boarding
+                - generic [ref=e307]:
+                  - button "Book Now" [ref=e308] [cursor=pointer]
+                  - button "OTHER DATES" [ref=e309] [cursor=pointer]
+            - generic [ref=e310]:
+              - generic:
+                - generic:
+                  - generic [ref=e311]:
+                    - strong [ref=e314]: VIVEK EXPRESS (19567)
+                    - generic [ref=e315]:
+                      - generic [ref=e316]: "Runs On: MTWTFSS"
+                      - strong [ref=e318]:
+                        - generic [ref=e319] [cursor=pointer]: Train Schedule 
+                  - generic [ref=e321]:
+                    - generic [ref=e322]:
+                      - strong [ref=e324]: 10:50 |
+                      - text: KRISHNARAJAPURM | Mon, 20 Jul
+                    - generic [ref=e325]:
+                      - generic [ref=e326]: 22:10
+                      - generic [ref=e327]:
+                        - strong [ref=e328]: 09:00 |
+                        - text: VASAI ROAD | Tue, 21 Jul
+                  - table [ref=e334]:
+                    - row "Sleeper (SL) Refresh  AC 3 Economy (3E) Refresh  AC 3 Tier (3A) Refresh  AC 2 Tier (2A) Refresh " [ref=e335]:
+                      - cell "Sleeper (SL) Refresh " [ref=e336]:
+                        - generic [ref=e337]:
+                          - strong [ref=e339]: Sleeper (SL)
+                          - generic [ref=e340] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e341]: 
+                      - cell "AC 3 Economy (3E) Refresh " [ref=e342]:
+                        - generic [ref=e343]:
+                          - strong [ref=e345]: AC 3 Economy (3E)
+                          - generic [ref=e346] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e347]: 
+                      - cell "AC 3 Tier (3A) Refresh " [ref=e348]:
+                        - generic [ref=e349]:
+                          - strong [ref=e351]: AC 3 Tier (3A)
+                          - generic [ref=e352] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e353]: 
+                      - cell "AC 2 Tier (2A) Refresh " [ref=e354]:
+                        - generic [ref=e355]:
+                          - strong [ref=e357]: AC 2 Tier (2A)
+                          - generic [ref=e358] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e359]: 
+                  - strong [ref=e364]:
+                    - generic [ref=e365]:
+                      - text: Please check NTES website or
+                      - link "NTES app" [ref=e366] [cursor=pointer]:
+                        - /url: https://play.google.com/store/apps/details?id=cris.icms.ntes
+                      - text: for actual time before boarding
+                - generic [ref=e371]:
+                  - button "Book Now" [ref=e372] [cursor=pointer]
+                  - button "OTHER DATES" [ref=e373] [cursor=pointer]
+            - generic [ref=e374]:
+              - generic:
+                - generic:
+                  - generic [ref=e375]:
+                    - strong [ref=e378]: BARMER AC EXP (14805)
+                    - generic [ref=e379]:
+                      - generic [ref=e380]: "Runs On: MTWTFSS"
+                      - strong [ref=e382]:
+                        - generic [ref=e383] [cursor=pointer]: Train Schedule 
+                  - generic [ref=e385]:
+                    - generic [ref=e386]:
+                      - strong [ref=e388]: 12:00 |
+                      - text: YESVANTPUR JN | Mon, 20 Jul
+                    - generic [ref=e389]:
+                      - generic [ref=e390]: 24:00
+                      - generic [ref=e391]:
+                        - strong [ref=e392]: 12:00 |
+                        - text: VASAI ROAD | Tue, 21 Jul
+                  - table [ref=e398]:
+                    - row "AC 3 Tier (3A) Refresh  AC 2 Tier (2A) Refresh  AC First Class (1A) Refresh " [ref=e399]:
+                      - cell "AC 3 Tier (3A) Refresh " [ref=e400]:
+                        - generic [ref=e401]:
+                          - strong [ref=e403]: AC 3 Tier (3A)
+                          - generic [ref=e404] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e405]: 
+                      - cell "AC 2 Tier (2A) Refresh " [ref=e406]:
+                        - generic [ref=e407]:
+                          - strong [ref=e409]: AC 2 Tier (2A)
+                          - generic [ref=e410] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e411]: 
+                      - cell "AC First Class (1A) Refresh " [ref=e412]:
+                        - generic [ref=e413]:
+                          - strong [ref=e415]: AC First Class (1A)
+                          - generic [ref=e416] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e417]: 
+                  - strong [ref=e422]:
+                    - generic [ref=e423]:
+                      - text: Please check NTES website or
+                      - link "NTES app" [ref=e424] [cursor=pointer]:
+                        - /url: https://play.google.com/store/apps/details?id=cris.icms.ntes
+                      - text: for actual time before boarding
+                - generic [ref=e429]:
+                  - button "Book Now" [ref=e430] [cursor=pointer]
+                  - button "OTHER DATES" [ref=e431] [cursor=pointer]
+            - generic [ref=e432]:
+              - generic:
+                - generic:
+                  - generic [ref=e433]:
+                    - strong [ref=e436]: CBE LTT EXP (11014)
+                    - generic [ref=e437]:
+                      - generic [ref=e438]: "Runs On: MTWTFSS"
+                      - strong [ref=e440]:
+                        - generic [ref=e441] [cursor=pointer]: Train Schedule 
+                  - generic [ref=e443]:
+                    - generic [ref=e444]:
+                      - strong [ref=e446]: 16:00 |
+                      - text: KSR BENGALURU | Mon, 20 Jul
+                    - generic [ref=e447]:
+                      - generic [ref=e448]: 21:55
+                      - generic [ref=e449]:
+                        - strong [ref=e450]: 13:55 |
+                        - text: LOKMANYATILAK T | Tue, 21 Jul
+                  - table [ref=e456]:
+                    - row "Sleeper (SL) Refresh  AC 3 Tier (3A) Refresh  AC 2 Tier (2A) Refresh  AC First Class (1A) Refresh " [ref=e457]:
+                      - cell "Sleeper (SL) Refresh " [ref=e458]:
+                        - generic [ref=e459]:
+                          - strong [ref=e461]: Sleeper (SL)
+                          - generic [ref=e462] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e463]: 
+                      - cell "AC 3 Tier (3A) Refresh " [ref=e464]:
+                        - generic [ref=e465]:
+                          - strong [ref=e467]: AC 3 Tier (3A)
+                          - generic [ref=e468] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e469]: 
+                      - cell "AC 2 Tier (2A) Refresh " [ref=e470]:
+                        - generic [ref=e471]:
+                          - strong [ref=e473]: AC 2 Tier (2A)
+                          - generic [ref=e474] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e475]: 
+                      - cell "AC First Class (1A) Refresh " [ref=e476]:
+                        - generic [ref=e477]:
+                          - strong [ref=e479]: AC First Class (1A)
+                          - generic [ref=e480] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e481]: 
+                  - strong [ref=e486]:
+                    - generic [ref=e487]:
+                      - text: Please check NTES website or
+                      - link "NTES app" [ref=e488] [cursor=pointer]:
+                        - /url: https://play.google.com/store/apps/details?id=cris.icms.ntes
+                      - text: for actual time before boarding
+                - generic [ref=e493]:
+                  - button "Book Now" [ref=e494] [cursor=pointer]
+                  - button "OTHER DATES" [ref=e495] [cursor=pointer]
+            - generic [ref=e496]:
+              - generic:
+                - generic:
+                  - generic [ref=e497]:
+                    - strong [ref=e500]: UDYAN EXP (11302)
+                    - generic [ref=e501]:
+                      - generic [ref=e502]: "Runs On: MTWTFSS"
+                      - strong [ref=e504]:
+                        - generic [ref=e505] [cursor=pointer]: Train Schedule 
+                  - generic [ref=e507]:
+                    - generic [ref=e508]:
+                      - strong [ref=e510]: 20:40 |
+                      - text: KSR BENGALURU | Mon, 20 Jul
+                    - generic [ref=e511]:
+                      - generic [ref=e512]: 23:35
+                      - generic [ref=e513]:
+                        - strong [ref=e514]: 20:15 |
+                        - text: C SHIVAJI MAH T | Tue, 21 Jul
+                  - table [ref=e520]:
+                    - row "Sleeper (SL) Refresh  AC 3 Economy (3E) Refresh  AC 3 Tier (3A) Refresh  AC 2 Tier (2A) Refresh  AC First Class (1A) Refresh " [ref=e521]:
+                      - cell "Sleeper (SL) Refresh " [ref=e522]:
+                        - generic [ref=e523]:
+                          - strong [ref=e525]: Sleeper (SL)
+                          - generic [ref=e526] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e527]: 
+                      - cell "AC 3 Economy (3E) Refresh " [ref=e528]:
+                        - generic [ref=e529]:
+                          - strong [ref=e531]: AC 3 Economy (3E)
+                          - generic [ref=e532] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e533]: 
+                      - cell "AC 3 Tier (3A) Refresh " [ref=e534]:
+                        - generic [ref=e535]:
+                          - strong [ref=e537]: AC 3 Tier (3A)
+                          - generic [ref=e538] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e539]: 
+                      - cell "AC 2 Tier (2A) Refresh " [ref=e540]:
+                        - generic [ref=e541]:
+                          - strong [ref=e543]: AC 2 Tier (2A)
+                          - generic [ref=e544] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e545]: 
+                      - cell "AC First Class (1A) Refresh " [ref=e546]:
+                        - generic [ref=e547]:
+                          - strong [ref=e549]: AC First Class (1A)
+                          - generic [ref=e550] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e551]: 
+                  - strong [ref=e556]:
+                    - generic [ref=e557]:
+                      - text: Please check NTES website or
+                      - link "NTES app" [ref=e558] [cursor=pointer]:
+                        - /url: https://play.google.com/store/apps/details?id=cris.icms.ntes
+                      - text: for actual time before boarding
+                - generic [ref=e563]:
+                  - button "Book Now" [ref=e564] [cursor=pointer]
+                  - button "OTHER DATES" [ref=e565] [cursor=pointer]
+            - generic [ref=e566]:
+              - generic:
+                - generic:
+                  - generic [ref=e567]:
+                    - strong [ref=e570]: JODHPUR EXP (20694)
+                    - generic [ref=e571]:
+                      - generic [ref=e572]: "Runs On: MTWTFSS"
+                      - strong [ref=e574]:
+                        - generic [ref=e575] [cursor=pointer]: Train Schedule 
+                  - generic [ref=e577]:
+                    - generic [ref=e578]:
+                      - strong [ref=e580]: 23:50 |
+                      - text: KSR BENGALURU | Mon, 20 Jul
+                    - generic [ref=e581]:
+                      - generic [ref=e582]: 22:45
+                      - generic [ref=e583]:
+                        - strong [ref=e584]: 22:35 |
+                        - text: VASAI ROAD | Tue, 21 Jul
+                  - table [ref=e590]:
+                    - row "Sleeper (SL) Refresh  AC 3 Tier (3A) Refresh  AC 2 Tier (2A) Refresh  AC First Class (1A) Refresh " [ref=e591]:
+                      - cell "Sleeper (SL) Refresh " [ref=e592]:
+                        - generic [ref=e593]:
+                          - strong [ref=e595]: Sleeper (SL)
+                          - generic [ref=e596] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e597]: 
+                      - cell "AC 3 Tier (3A) Refresh " [ref=e598]:
+                        - generic [ref=e599]:
+                          - strong [ref=e601]: AC 3 Tier (3A)
+                          - generic [ref=e602] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e603]: 
+                      - cell "AC 2 Tier (2A) Refresh " [ref=e604]:
+                        - generic [ref=e605]:
+                          - strong [ref=e607]: AC 2 Tier (2A)
+                          - generic [ref=e608] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e609]: 
+                      - cell "AC First Class (1A) Refresh " [ref=e610]:
+                        - generic [ref=e611]:
+                          - strong [ref=e613]: AC First Class (1A)
+                          - generic [ref=e614] [cursor=pointer]:
+                            - text: Refresh
+                            - generic [ref=e615]: 
+                  - strong [ref=e620]:
+                    - generic [ref=e621]:
+                      - text: Please check NTES website or
+                      - link "NTES app" [ref=e622] [cursor=pointer]:
+                        - /url: https://play.google.com/store/apps/details?id=cris.icms.ntes
+                      - text: for actual time before boarding
+                - generic [ref=e627]:
+                  - button "Book Now" [ref=e628] [cursor=pointer]
+                  - button "OTHER DATES" [ref=e629] [cursor=pointer]
+          - iframe [ref=e634]:
+            - link [ref=f35e2] [cursor=pointer]:
+              - /url: https://googleads.g.doubleclick.net/pcs/click?xai=AKAOjsuUjlsMCS6w_cFeCYgsq_ndI0x75rMiMYvpGTql1WVMZpTnyKcRIHCfjo55K4F4-X8aaB_8FN6358TfKqPj2406xjjE4egnVKIiLegUGNrbWaEhXpz7i7BB_XJaz20qwaT7IA3X7l6P2VJItnGblP5iyzq8WabnhRjdAjP5lIgNurS6tNaQ_MX52W7pXy_y6APanoOmqSOMi5VFHVTKEhVvzLD1bs_OlbR-KZxSwDh6SaSmzcQjo9IrGftk7wxA9YdH9Tlhc0KsiOoAmr5m-ZZ-F2Pr7DjEv4VvNOde9DVvDG_zwcos8Zm7NU4FEh6nY8kuxYxqLgEqaZzmNq0wvr4DmV4hd9k6W3ty8AIIy5FEs9iY_5Ci5w1MeAL68sSsA8To896LQL42xcXtYT7J6HtpcIoYVM2j45bdrmM1Y7qNE2U&sai=AMfl-YQfIcKm1WrBj5zmfW1Ur55_ffHLL2ZXbQv2O7j9YfUmB4qDdWAUCvizs8XjN8Lq42W4e7MRxndtChZhoSgasvJ2HtHuyLDUMnqx3fuM3LQW6AbgH5TEU3HAcN_XZzArtQk-AjtsABGYRwwM9NK9gp39ikoWrz8Qz4lnrh1NsLpzLJmPr-WLJOJck1Rjfs9mp8aGRl4nWyvICtLi1ezB0_FJEjqkMVXKvdbB7rR-rc4jtY4RXH8drdQ1dDOTCP-TnDKxxfTBQMu05Ly08_r-rQlb4hXfsydcJkNaIukwVHYwSPDjQ22ET54Q2zQNY5ZkvUbhJ4m2_EJrs1jzN7Duo6GvZMmFYjMN-KagP7RYp3mOEKGj3woGyNt0HwSBXpIkw5ceK-_aux-9CSsmqaU96vA&sig=Cg0ArKJSzNtOvwNm240w&fbs_aeid=%5Bgw_fbsaeid%5D&adurl=https://www.bus.irctc.co.in/home
+    - generic [ref=e635]:
+      - contentinfo [ref=e637]:
+        - text: Get Connected with us on social networks
+        - generic [ref=e638]:
+          - link "I.R.C.T.C. Official instagram page. opens a new windows" [ref=e639] [cursor=pointer]:
+            - /url: https://www.facebook.com/IRCTCofficial/
+            - generic [ref=e640]: 
+          - link "I.R.C.T.C. Official whatsapp page. opens a new windows" [ref=e641] [cursor=pointer]:
+            - /url: https://whatsapp.com/channel/0029Va4wpCW84OmKdPNQi41P
+            - img [ref=e643]
+          - link "I.R.C.T.C. Official youtube page. opens a new windows" [ref=e644] [cursor=pointer]:
+            - /url: https://youtube.com/c/IRCTCOFFICIAL
+            - generic [ref=e645]: 
+          - link "I.R.C.T.C. Official facebook page. opens a new windows" [ref=e646] [cursor=pointer]:
+            - /url: https://instagram.com/irctc.official?igshid=yyg5byow704l
+            - generic [ref=e647]: 
+          - link "I.R.C.T.C. Official linkedin page. opens a new windows" [ref=e648] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/irctcofficial
+            - generic [ref=e649]: 
+          - link "I.R.C.T.C. Official telegram page. opens a new windows" [ref=e650] [cursor=pointer]:
+            - /url: https://t.me/IRCTC_Official
+            - generic [ref=e651]: 
+          - link "I.R.C.T.C. Official pinterest page. opens a new windows" [ref=e652] [cursor=pointer]:
+            - /url: https://in.pinterest.com/irctcofficial/
+            - generic [ref=e653]: 
+          - link "I.R.C.T.C. Official tumblr page. opens a new windows" [ref=e654] [cursor=pointer]:
+            - /url: https://irctcofficial.tumblr.com/
+            - generic [ref=e655]: 
+          - link "I.R.C.T.C. Official Koo page. opens a new windows" [ref=e656] [cursor=pointer]:
+            - /url: https://www.kooapp.com/profile/irctcofficial
+            - img [ref=e658]
+          - link "I.R.C.T.C. Official twitter page. opens a new windows" [ref=e659] [cursor=pointer]:
+            - /url: https://twitter.com/IRCTCofficial
+            - generic [ref=e660]: 
+      - generic [ref=e664]:
+        - generic [ref=e666]:
+          - button "IRCTC Trains " [ref=e667] [cursor=pointer]:
+            - generic [ref=e668]:
+              - text: IRCTC Trains
+              - generic [ref=e669]: 
+          - button "General Information " [ref=e670] [cursor=pointer]:
+            - generic [ref=e671]:
+              - text: General Information
+              - generic [ref=e672]: 
+          - button "Important Information " [ref=e673] [cursor=pointer]:
+            - generic [ref=e674]:
+              - text: Important Information
+              - generic [ref=e675]: 
+          - button "Agents " [ref=e676] [cursor=pointer]:
+            - generic [ref=e677]:
+              - text: Agents
+              - generic [ref=e678]: 
+          - button "Enquiries " [ref=e679] [cursor=pointer]:
+            - generic [ref=e680]:
+              - text: Enquiries
+              - generic [ref=e681]: 
+        - generic [ref=e683]:
+          - button "How To " [ref=e684] [cursor=pointer]:
+            - generic [ref=e685]:
+              - text: How To
+              - generic [ref=e686]: 
+          - button "IRCTC Official App " [ref=e687] [cursor=pointer]:
+            - generic [ref=e688]:
+              - text: IRCTC Official App
+              - generic [ref=e689]: 
+          - button "Advertise with us " [ref=e690] [cursor=pointer]:
+            - generic [ref=e691]:
+              - text: Advertise with us
+              - generic [ref=e692]: 
+          - button "Refund Rules " [ref=e693] [cursor=pointer]:
+            - generic [ref=e694]:
+              - text: Refund Rules
+              - generic [ref=e695]: 
+          - button "Person With Disability Facilities " [ref=e696] [cursor=pointer]:
+            - generic [ref=e697]:
+              - text: Person With Disability Facilities
+              - generic [ref=e698]: 
+        - generic [ref=e700]:
+          - button "E-Wallet " [ref=e701] [cursor=pointer]:
+            - generic [ref=e702]:
+              - text: E-Wallet
+              - generic [ref=e703]: 
+          - button "IRCTC Co-branded Card Benefits " [ref=e704] [cursor=pointer]:
+            - generic [ref=e705]:
+              - text: IRCTC Co-branded Card Benefits
+              - generic [ref=e706]: 
+          - button "IRCTC-iPAY Payment Gateway " [ref=e707] [cursor=pointer]:
+            - generic [ref=e708]:
+              - text: IRCTC-iPAY Payment Gateway
+              - generic [ref=e709]: 
+          - button "IRCTC Zone " [ref=e710] [cursor=pointer]:
+            - generic [ref=e711]:
+              - text: IRCTC Zone
+              - generic [ref=e712]: 
+          - button "DMRC Ticket Booking at IRCTC " [ref=e713] [cursor=pointer]:
+            - generic [ref=e714]:
+              - text: DMRC Ticket Booking at IRCTC
+              - generic [ref=e715]: 
+        - generic [ref=e717]:
+          - button "For Newly Migrated Agents " [ref=e719] [cursor=pointer]:
+            - generic [ref=e720]:
+              - text: For Newly Migrated Agents
+              - generic [ref=e721]: 
+          - button "Mobile Zone " [ref=e722] [cursor=pointer]:
+            - generic [ref=e723]:
+              - text: Mobile Zone
+              - generic [ref=e724]: 
+          - button "Policies " [ref=e725] [cursor=pointer]:
+            - generic [ref=e726]:
+              - text: Policies
+              - generic [ref=e727]: 
+          - button "Ask Disha ChatBot " [ref=e728] [cursor=pointer]:
+            - generic [ref=e729]:
+              - text: Ask Disha ChatBot
+              - generic [ref=e730]: 
+          - button "About us " [ref=e731] [cursor=pointer]:
+            - generic [ref=e732]:
+              - text: About us
+              - generic [ref=e733]: 
+        - generic [ref=e736]:
+          - button "Help & Support" [ref=e737] [cursor=pointer]
+          - button "E-Pantry " [ref=e738] [cursor=pointer]:
+            - generic [ref=e739]:
+              - text: E-Pantry
+              - generic [ref=e740]: 
+      - generic [ref=e743]:
+        - img "Secured Payment Partner" [ref=e746]
+        - generic [ref=e748]:
+          - paragraph [ref=e749]: Copyright Â© 2026 - www.irctc.co.in. All Rights Reserved
+          - paragraph [ref=e750]:
+            - text: Designed and Hosted by
+            - strong [ref=e751]:
+              - link "CRIS" [ref=e752] [cursor=pointer]:
+                - /url: http://cris.org.in
+          - paragraph [ref=e753]:
+            - strong [ref=e754]:
+              - link "Compatible Browsers link opens a new windows" [ref=e755] [cursor=pointer]:
+                - /url: http://contents.irctc.co.in/en/BetaSiteCompatibleBrowser.html
+                - text: Compatible Browsers
+          - paragraph [ref=e756]: DM5MS8
+  - generic [ref=e760] [cursor=pointer]: Easy Booking on AskDisha
+```

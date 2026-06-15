@@ -18,7 +18,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: ENV=qa npx playwright test --project="smoke_suite"
+      run: npx playwright test myntra.spec --project="chromium"
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

@@ -1,0 +1,1 @@
+[{"uid":"f97712800950b77","name":"irctc-1","time":{"start":1781248740999,"stop":1781248771832,"duration":30833},"status":"broken","severity":"normal"},{"uid":"577b6ddb724b8acc","name":"irctc-1","time":{"start":1781248740993,"stop":1781248769111,"duration":28118},"status":"passed","severity":"normal"}]

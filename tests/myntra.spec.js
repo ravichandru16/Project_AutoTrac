@@ -1,7 +1,7 @@
 import {test,expect} from "@playwright/test"
 
 test.setTimeout(60000)
-test("myntra",async({page})=>{
+test.only("myntra",async({page})=>{
    // await page.setDefaultTimeout(60000)
     await page.goto("https://www.myntra.com/")
     await page.locator("//a[.='Men']").hover()
@@ -33,10 +33,12 @@ test("myntra",async({page})=>{
     
     let [page2]=await Promise.all([
         page.waitForEvent('popup'),
-        page.click("//ul[@class='results-base']/li[@id='36836606']")
+        page.locator("//ul/li[@class='product-base']").first().click()
     ])
         //await page2.setDefaultTimeout(60000)
-        await page2.locator("//p[.='L']/..").click()
+        await page2.locator("//div[@class='size-buttons-buttonContainer']/button[not(contains(@class,'disabled'))]").first().click()
+       
+        await page2.waitForSelector("//div[.='ADD TO BAG']")
         await page2.locator("//div[.='ADD TO BAG']").click()
         await page2.locator("//h3[.='SIMILAR PRODUCTS']").scrollIntoViewIfNeeded()
         
@@ -48,18 +50,20 @@ test("myntra",async({page})=>{
         )
         //await page3.setDefaultTimeout(60000)
         //await page3.waitForLoadState('load')
-        await page3.locator("//div[@class='size-buttons-buttonContainer']//p[.='S']").click()
-        await page3.setDefaultTimeout(60000)
+        await page3.locator("//div[@class='size-buttons-buttonContainer']/button[not(contains(@class,'disabled'))]").first().click()
+       
+       // await page3.setDefaultTimeout(60000)
+       await page3.waitForSelector("//div[.='ADD TO BAG']")
         await page3.locator("//div[.='ADD TO BAG']").click()
-        await page3.setDefaultTimeout(60000)
+       // await page3.setDefaultTimeout(60000)
         await page3.locator("//a/span[.='GO TO BAG']").click()
 
+        await page3.waitForSelector("//button/div[.='PLACE ORDER']")
         await page3.screenshot({path:`./screenshots/proof1.png`})
         await page3.locator("//div[@class='item-base-item  ']//*[name()='svg' and @class='itemContainer-base-closeIcon']").last().click()
 
         await page3.getByRole('button',{name:'REMOVE'}).last().click()
 
-        await page.waitForLoadState('load')
         await page3.screenshot({path:"./screenshots/proof2.png"})
         //await page3.pause()
         await page3.click("//div[.='ENTER PIN CODE']")
@@ -67,7 +71,7 @@ test("myntra",async({page})=>{
         await page3.fill('#pincode',"560078")
         await page3.locator("//div[.='CHECK']").last().click()
 
-        console.log(await page3.locator("//span[contains(.,'2026')]").textContent())
+        console.log(await page3.locator("//span[@class='itemComponents-base-highlightedMessage  ']").textContent())
         console.log(await page3.locator("//span[@class='priceDetail-base-redesignRupeeTotalIcon']/..").textContent())
 
 
@@ -120,32 +124,29 @@ test("irctc",async({page})=>{
     }
 })
 
-test.only("irctc-1",async({page})=>{
+test("irctc-1",async({page})=>{
     await page.goto("https://www.irctc.co.in/nget/train-search")
     
     await page.fill("//span[@class='ng-tns-c68-7 ui-autocomplete ui-widget']/input",'Bengaluru')
-    try{
-    await page.fill("//span[@class='ng-tns-c68-7 ui-autocomplete ui-widget']/input",'Bengaluru')
-    }
-    catch(error)
-    {
-    await page.click("//a[contains(@class,'fa fa-window-close pull-right loginCloseBtn')]")
-    }
+    
+    // await page.getByPlaceholder("User Name").fill("Ravichandiran16")
+    // await page.getByPlaceholder("Password").fill("Ravi161021#")
+    // await page.getByRole('button',{name:'SIGN IN'}).click()
 
     await page.fill("//span[@class='ng-tns-c68-7 ui-autocomplete ui-widget']/input",'Bengaluru')
-    await page.waitForSelector("//ul[@role='listbox']")
+   
+
+   // await page.fill("//span[@class='ng-tns-c68-7 ui-autocomplete ui-widget']/input",'Bengaluru')
+    await page.waitForSelector("//li/span[@class='ng-star-inserted' and contains(.,'KSR')]")
     await page.keyboard.press('ArrowDown')
     await page.keyboard.press('Enter')
     
     await page.fill("//span[@class='ng-tns-c68-8 ui-autocomplete ui-widget']/input",'Mumbai')
-    try{
-        await page.fill("//span[@class='ng-tns-c68-8 ui-autocomplete ui-widget']/input",'Mumbai')
-    }catch(error)
-    {
-         await page.click("//a[contains(@class,'fa fa-window-close pull-right loginCloseBtn')]")
-    }
+    
+    //await page.click("//a[contains(@class,'fa fa-window-close pull-right loginCloseBtn')]")
+    
 
-    await page.fill("//span[@class='ng-tns-c68-8 ui-autocomplete ui-widget']/input",'Mumbai')
+    //await page.fill("//span[@class='ng-tns-c68-8 ui-autocomplete ui-widget']/input",'Mumbai')
     await page.waitForSelector("//ul[@role='listbox']")
     await page.keyboard.press('ArrowDown')
     await page.keyboard.press('Enter')
@@ -154,13 +155,8 @@ test.only("irctc-1",async({page})=>{
     
     await page.click("//span[@class='ng-tns-c69-9 ui-calendar']/input")
 
-    try{
-        await page.click("//span[@class='ng-tns-c69-9 ui-calendar']/input")
-    }
-    catch(error)
-    {
-        await page.click("//a[contains(@class,'fa fa-window-close pull-right loginCloseBtn')]") 
-    }
+// await page.click("//a[contains(@class,'fa fa-window-close pull-right loginCloseBtn')]") 
+    
 
     if(await page.locator("//div/span[.='July']").isVisible())
     {
