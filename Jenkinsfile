@@ -10,6 +10,12 @@ pipeline {
             }
         }
 
+        stage('Install browsers')
+        {
+            steps {
+                bat 'npx playwright install'
+            }
+        }
         stage('Playwright Test') {
             steps {
                 bat 'npx playwright test tests/myntra.spec.js --project="chromium"'
