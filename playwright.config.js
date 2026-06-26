@@ -14,7 +14,8 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-//dotenv.config({path:`process.env.${process.env.ENV}||dev`})
+//dotenv.config({path:`process.env.dev`})
+const time=new Date().toISOString().replace(/[:.]/g,'-')
 export default defineConfig({
   testDir: './tests',
 
@@ -31,18 +32,24 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html',{open:'on-test-failure'}]],
+  reporter: [['html',{outputFolder:`report-${time}`}]],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL:process.env.BASEURL,
      headless:false,
+     viewport:null,
+     launchOptions:{
+      args:['--start-maximized']
+     },
+     
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     screenshot:'only-on-failure',
     video:'on-first-retry',
     trace: 'on-first-retry',
+    ignoreHTTPSErrors:true
     //storageState:'playwright/user.json'
   },
 

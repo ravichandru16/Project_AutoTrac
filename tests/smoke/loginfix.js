@@ -1,6 +1,6 @@
 const {test:base}=require('@playwright/test')
 const path = require('path')
-require('dotenv').config({path:path.join(__dirname,`../../test_data/.env.${process.env.ENV}`)})
+require('dotenv').config({path:path.join(__dirname,`../../test_data/.env.dev`)})
 export const test=base.extend({
     login:async({page},use)=>{
         await page.goto(process.env.BASE_URL)

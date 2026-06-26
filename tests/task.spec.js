@@ -1,4 +1,5 @@
 import {test,expect} from "@playwright/test"
+import fs from "fs"
 
 test("task1",async({page})=>{
     await page.goto("https://www.flipkart.com/")
@@ -31,6 +32,8 @@ test("task1",async({page})=>{
 
     await expect(page2.locator("//a[@title='Cart']//span[.='1']").isVisible()).toBeTruthy()
     console.log("Product added to cart")
+
+    fs.writeFileSync()
  })
 
  //test("")
@@ -41,3 +44,34 @@ test("task1",async({page})=>{
   input: "Generate login test cases"
 });
  })
+
+
+test("broken links",async({page,request})=>{
+  await page.setViewportSize({width:1920,height:720})
+  await page.goto("https://testautomationpractice.blogspot.com/")
+
+  let links=await page.locator("//a").evaluateAll(element=>element.map(el=>el.href))
+
+  for(let link of links)
+  {
+    if(!link || !link=='/'|| !link.startsWith('http'))continue
+
+    try{
+      let res=await request.get(link)
+
+    if(res.status()>=400)
+    {
+      console.log(`${link} is a broken link`)
+    }
+    else
+    {
+      console.log(`${link} is not a broken link`)
+    }
+  }
+  catch(error)
+{
+  console.log(`${link} is not a link`)
+}
+}
+
+})
